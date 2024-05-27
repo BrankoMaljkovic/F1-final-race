@@ -14,12 +14,12 @@ export default function App() {
                 <nav className="top-navigation" >
                     <ul>
                         <li>
-                            <Link to="/">Comments</Link>
-                            <Link to="/driver">Comments</Link>
-                            <Link to="/teams">Comments</Link>
-                            <Link to="/team">Comments</Link>
-                            <Link to="/races">Comments</Link>
-                            <Link to="/race">Comments</Link>
+                            <Link to="/">Drivers</Link>
+                            <Link to="/driver">Driver</Link>
+                            <Link to="/teams">Teams</Link>
+                            <Link to="/team">Team</Link>
+                            <Link to="/races">Races</Link>
+                            <Link to="/race">Race</Link>
                         </li>
                     </ul>
                 </nav>
