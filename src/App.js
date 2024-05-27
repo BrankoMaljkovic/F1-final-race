@@ -1,20 +1,24 @@
+import Driver from "./components/Driver";
+import Drivers from "./components/Drivers";
+import Teams from "./components/Teams";
+import Team from "./components/Team";
+
+
 function App() {
   return (
     <div className="App">
-      <p>Ovo je test da sve radi kako treba</p>
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Marko</h1>
+      <Driver />
+
+      <h1>Sabo</h1>
+      <Drivers />
+
+      <h1>Kaca</h1>
+      <Teams />
+
+      <h1>Branko</h1>
+      <Team />
+
     </div>
   );
 }
