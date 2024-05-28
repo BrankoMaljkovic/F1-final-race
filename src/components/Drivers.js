@@ -26,10 +26,10 @@ export default function Drivers() {
             <h1>Drivers Championship</h1>
             <table>
                 <thead>
-                    <th>1</th>
-                    <th>2</th>
-                    <th>3</th>
-                    <th>4</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                 </thead>
                 <tbody>
                     {drivers.map((driver, i) => {
