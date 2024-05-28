@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
 export default function Teams() {
   console.log(`teams`);
   const [view, setView] = useState('constructors');
@@ -7,26 +9,33 @@ export default function Teams() {
   const [races, setRaces] = useState([]);
 
   useEffect(() => {
-    fetch('http://ergast.com/api/f1/2013/constructorStandings.json')
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Fetched constructor standings:', data);
+    axios
+      .get('http://ergast.com/api/f1/2013/constructorStandings.json')
+      .then((response) => {
+        console.log('Fetched constructor standings:', response.data);
         setConstructors(
-          data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings
+          response.data.MRData.StandingsTable.StandingsLists[0]
+            .ConstructorStandings
         );
+      })
+      .catch((error) => {
+        console.error('Error fetching constructor standings:', error);
       });
   }, []);
 
   useEffect(() => {
     if (constructorId) {
       console.log(`Fetching races for constructor: ${constructorId}`);
-      fetch(
-        `https://ergast.com/api/f1/2013/constructors/${constructorId}/results.json`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('Fetched races for constructor:', data);
-          setRaces(data.MRData.RaceTable.Races);
+      axios
+        .get(
+          `https://ergast.com/api/f1/2013/constructors/${constructorId}/results.json`
+        )
+        .then((response) => {
+          console.log('Fetched races for constructor:', response.data);
+          setRaces(response.data.MRData.RaceTable.Races);
+        })
+        .catch((error) => {
+          console.error('Error fetching races for constructor:', error);
         });
     }
   }, [constructorId]);
