@@ -26,7 +26,7 @@ export default function App() {
           <Route path='/teams' element={<Teams />} />
           <Route path='/teamDetails/:teamId' element={<Team />} />
           <Route path='/races' element={<Races />} />
-          <Route path='/raceDetails/:raceId' element={<Race />} />
+          <Route path='/race/:raceId' element={<Race />} />
         </Routes>
       </Router>
     </div>
