@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Races() {
   console.log(`races`);
 
   const [races, setRaces] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,6 +25,7 @@ export default function Races() {
 
   const handleRoundId = (round) => {
     console.log('handleRoundId', round);
+    navigate(`/race/${round}`);
   };
 
   return (
