@@ -38,7 +38,7 @@ export default function Drivers() {
                             <tr>
                             <td>{driver.position}</td>
                             <td>{driver.Driver.givenName} {driver.Driver.familyName}</td>
-                            <td>{driver.Constructors.constructorId}</td>
+                            <td>{driver.Constructors[0].constructorId}</td>
                             <td>{driver.points}</td>
                         </tr>
                         )
@@ -50,6 +50,3 @@ export default function Drivers() {
         </div>
     )
 }
-
-
-
