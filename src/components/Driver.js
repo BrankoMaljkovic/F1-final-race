@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Driver() {
-    const [driverDetails, setDriverDetails] = useState("");
+    const [driverDetails, setDriverDetails] = useState({});
     const [driverRaces, setDriverRaces] = useState([]);
+    const [loading, setLoading] = useState(true);
 
 
 
@@ -12,19 +13,21 @@ export default function Driver() {
         const getDriverDetails = async () => {
             const url = ("http://ergast.com/api/f1/2013/drivers/alonso/driverStandings.json");
             const response = await axios.get(url);
-            console.log("response", response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+            console.log("response final", response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
 
-            setDriverDetails(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0].Driver);
+            setDriverDetails(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
+            setLoading(false);
         }
 
 
 
         const getDriverRaces = async () => {
-            const url = ("http://ergast.com/api/f1/2013/drivers/albert_park/results.json");
+            const url = ("http://ergast.com/api/f1/2013/drivers/vettel/results.json");
             const response = await axios.get(url);
-            //console.log("albertpark", response.data.MRData.RaceTable.Races);
 
-            //setDriverRaces(response.data.MRData.RaceTable.Races);
+            console.log("albertpark", response.data.MRData.RaceTable);
+
+            setDriverRaces(response.data.MRData.RaceTable.Races);
         }
 
         getDriverDetails();
@@ -32,20 +35,44 @@ export default function Driver() {
 
     }, []);
 
+    if (loading) {
+        return <h1>Loading...</h1>
+    }
+
     return (
         <div>
             <div>
                 <h1>Driver Details</h1>
-                <p>Name: {driverDetails.familyName}</p>
-                <p>Nationality: {driverDetails.nationality}</p>
-                <p>Team: {driverDetails.name}</p>
+                <img src={require(`../img/${driverDetails.Driver.familyName.toLowerCase()}.jpg`)} />
+                <p>Name: {driverDetails.Driver.familyName}</p>
+                <p>Nationality: {driverDetails.Driver.nationality}</p>
+                <p>Team: {driverDetails.Constructors[0].name}</p>
+                <p>Birth: {driverDetails.Driver.dateOfBirth}</p>
+                <p>Biography: <a href={driverDetails.Driver.url}>Link to Biography</a></p>
 
                 <h2>Driver Races</h2>
-                <ul>
-                    {/* {driverRaces.map((Races, i) => (
-                        <li key={i}>{Races}</li>
-                    ))} */}
-                </ul>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Round</th>
+                            <th>Grand Prix</th>
+                            <th>Team</th>
+                            <th>Grid</th>
+                            <th>Race</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {driverRaces.map((race, index) => (
+                            <tr key={index}>
+                                <td>{race.round}</td>
+                                <td>{race.raceName}</td>
+                                <td>{race.Results[0].Constructor.name}</td>
+                                <td>{race.Results[0].grid}</td>
+                                <td>{race.Results[0].status}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </div>
     );
