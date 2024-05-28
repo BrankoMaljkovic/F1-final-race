@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 export default function Race() {
-  const { round } = useParams();
+  const { raceId } = useParams();
   const [qualifyingResults, setQualifyingResults] = useState([]);
   const [raceResults, setRaceResults] = useState([]);
   const [raceDetails, setRaceDetails] = useState(null);
@@ -13,9 +13,9 @@ export default function Race() {
     const fetchData = async () => {
       try {
         const [qualifyingResponse, raceResponse, raceDetailsResponse] = await Promise.all([
-          axios.get(`http://ergast.com/api/f1/2013/${round}/qualifying.json`),
-          axios.get(`http://ergast.com/api/f1/2013/${round}/results.json`),
-          axios.get(`https://ergast.com/api/f1/2013/results/1.json`)
+          axios.get(`http://ergast.com/api/f1/2013/${raceId}/qualifying.json`),
+          axios.get(`http://ergast.com/api/f1/2013/${raceId}/results.json`),
+          axios.get(`http://ergast.com/api/f1/2013/results/1.json`)
         ]);
 
         const qualifyingData = qualifyingResponse.data.MRData.RaceTable.Races[0].QualifyingResults;
@@ -31,7 +31,7 @@ export default function Race() {
       }
     };
     fetchData();
-  }, [round]);
+  }, []);
 
   if(loading){
     return <h1>Loading...</h1>
@@ -48,7 +48,7 @@ export default function Race() {
         <p>Full Report: <a href={raceDetails.url}>Link to Full Report</a></p>
       </div>
 
-      <h1>Race Results - Round {round}</h1>
+      <h1>Race Results - Round {raceId}</h1>
       <h2>Qualifying Results</h2>
       <table>
         <thead>
