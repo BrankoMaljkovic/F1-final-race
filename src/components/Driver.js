@@ -44,7 +44,7 @@ export default function Driver() {
             <div>
                 <h1>Driver Details</h1>
                 <img src={require(`../img/${driverDetails.Driver.familyName.toLowerCase()}.jpg`)} />
-                <p>Name: {driverDetails.Driver.familyName}</p>
+                <p>Name: {`${driverDetails.Driver.givenName} ${driverDetails.Driver.familyName} ` } </p>
                 <p>Nationality: {driverDetails.Driver.nationality}</p>
                 <p>Team: {driverDetails.Constructors[0].name}</p>
                 <p>Birth: {driverDetails.Driver.dateOfBirth}</p>
