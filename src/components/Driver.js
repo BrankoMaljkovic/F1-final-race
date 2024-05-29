@@ -24,7 +24,7 @@ export default function Driver() {
 
 
         const getDriverRaces = async () => {
-            const url = ("http://ergast.com/api/f1/2013/drivers/vettel/results.json");
+            const url = (`http://ergast.com/api/f1/2013/drivers/${driverId}/results.json`);
             const response = await axios.get(url);
 
             console.log("albertpark", response.data.MRData.RaceTable);
