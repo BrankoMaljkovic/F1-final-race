@@ -7,7 +7,7 @@ export default function Race() {
   const [qualifyingResults, setQualifyingResults] = useState([]);
   const [raceResults, setRaceResults] = useState([]);
   const [loading, setLoading] = useState (true);
-
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -15,7 +15,7 @@ export default function Race() {
           axios.get(`http://ergast.com/api/f1/2013/${raceId}/qualifying.json`),
           axios.get(`http://ergast.com/api/f1/2013/${raceId}/results.json`)
         ]);
-
+        
         const qualifyingData = qualifyingResponse.data.MRData.RaceTable.Races[0]; 
         const raceData = raceResponse.data.MRData.RaceTable.Races[0].Results;
 
@@ -29,9 +29,20 @@ export default function Race() {
     fetchData();
   }, []);
 
+  const getBestTime = (result) => {
+    console.log("BT" , result.Q1,result.Q2, result.Q3)
+    const nizBestTime = [result.Q1,result.Q2, result.Q3];
+    const sortBestTime = nizBestTime.sort();
+    console.log(`nizBestResult`, sortBestTime);
+    return(
+      `${sortBestTime[0]}`
+    )
+  }
+
   if(loading){
     return <h1>Loading...</h1>
   }
+
   return (
     <div>
       <div>
@@ -56,12 +67,12 @@ export default function Race() {
           </tr>
         </thead>
         <tbody>
-          {raceResults.map((result, index) => (
+          {qualifyingResults.QualifyingResults.map((result, index) => (
             <tr key={index}>
               <td>{result.position}</td>
               <td>{result.Driver.familyName}</td>
               <td>{result.Constructor.name}</td>
-              <td>{result.Q3 || result.Q2 || result.Q1}</td>
+              <td>{getBestTime(result)}</td>
             </tr>
           ))}
         </tbody>
