@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Flag from 'react-flagkit';
+import {getFlagCode} from "../helpers";
 
-export default function Driver() {
+export default function Driver(props) {
     const [driverDetails, setDriverDetails] = useState({});
     const [driverRaces, setDriverRaces] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -46,6 +48,7 @@ export default function Driver() {
             <div>
                 <h1>Driver Details</h1>
                 <img src={require(`../img/${driverDetails.Driver.familyName.toLowerCase()}.jpg`)} />
+                <Flag country={getFlagCode(props.flags, driverDetails.Driver.nationality)} />
                 <p>Name: {`${driverDetails.Driver.givenName} ${driverDetails.Driver.familyName} ` } </p>
                 <p>Nationality: {driverDetails.Driver.nationality}</p>
                 <p>Team: {driverDetails.Constructors[0].name}</p>

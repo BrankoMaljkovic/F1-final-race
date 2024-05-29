@@ -32,7 +32,6 @@ export default function Drivers(props) {
         navigate(`/driverDetails/${id}`);
     };
 
-
     if (loading) {
         return <h1>Loading...</h1>
     }
@@ -59,7 +58,7 @@ export default function Drivers(props) {
                                 }
                             >
                                 <td>
-                                    <Flag country={getFlagCode(props.flags ,driver.Driver.nationality)} />
+                                    <Flag country={getFlagCode(props.flags, driver.Driver.nationality)} />
                                 </td>
                                 <td>{driver.position}</td>
                                 <td>{driver.Driver.givenName} {driver.Driver.familyName}</td>
