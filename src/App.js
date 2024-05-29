@@ -35,12 +35,12 @@ export default function App() {
         </nav>
 
         <Routes>
-          <Route path='/' element={<Drivers />} />
-          <Route path='/driverDetails/:driverId' element={<Driver />} />
-          <Route path='/teams' element={<Teams />} />
-          <Route path='/teamDetails/:teamId' element={<Team />} />
-          <Route path='/races' element={<Races />} />
-          <Route path='/race/:raceId' element={<Race />} />
+          <Route path='/' element={<Drivers flags={flagsList}/>} />
+          <Route path='/driverDetails/:driverId' element={<Driver flags={flagsList} /> } />
+          <Route path='/teams' element={<Teams flags={flagsList}/>} />
+          <Route path='/teamDetails/:teamId' element={<Team flags={flagsList}/>} />
+          <Route path='/races' element={<Races flags={flagsList}/>} />
+          <Route path='/race/:raceId' element={<Race flags={flagsList}/>} />
         </Routes>
       </Router>
     </div>
