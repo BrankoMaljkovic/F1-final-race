@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Teams() {
   const [constructors, setConstructors] = useState([]);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState (true);
 
   useEffect(() => {
     axios
@@ -15,6 +16,9 @@ export default function Teams() {
           response.data.MRData.StandingsTable.StandingsLists[0]
             .ConstructorStandings
         );
+
+        setLoading(false);
+
       })
       .catch((error) => {
         console.error('Error fetching constructor standings:', error);
@@ -25,6 +29,12 @@ export default function Teams() {
     console.log(`Constructor clicked: ${id}`);
     navigate(`/teamDetails/${id}`);
   };
+
+  
+
+  if(loading){
+    return <h1>Loading...</h1>
+  }
 
   return (
     <div className='App'>
@@ -42,7 +52,13 @@ export default function Teams() {
           <tbody>
             {constructors.map((constructor, index) => (
               <tr key={constructor.Constructor.constructorId}>
-                <td>{index + 1}</td>
+                <td
+                onClick={() =>
+                  handleConstructorClick(
+                    constructor.Constructor.constructorId
+                  )
+                }
+                >{index + 1}</td>
                 <td
                   onClick={() =>
                     handleConstructorClick(
@@ -52,7 +68,13 @@ export default function Teams() {
                 >
                   {constructor.Constructor.name}
                 </td>
-                <td>{constructor.points}</td>
+                <td
+                onClick={() =>
+                  handleConstructorClick(
+                    constructor.Constructor.constructorId
+                  )
+                }
+                >{constructor.points}</td>
                 <td>
                   <a
                     href={constructor.Constructor.url}
