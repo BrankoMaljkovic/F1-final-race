@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Flag from 'react-flagkit';
+import { getFlagCode } from '../helpers';
+import Team from './Team';
 
-export default function Teams() {
+export default function Teams(props) {
   const [constructors, setConstructors] = useState([]);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState (true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -18,7 +21,6 @@ export default function Teams() {
         );
 
         setLoading(false);
-
       })
       .catch((error) => {
         console.error('Error fetching constructor standings:', error);
@@ -30,10 +32,8 @@ export default function Teams() {
     navigate(`/teamDetails/${id}`);
   };
 
-  
-
-  if(loading){
-    return <h1>Loading...</h1>
+  if (loading) {
+    return <h1>Loading...</h1>;
   }
 
   return (
@@ -52,13 +52,23 @@ export default function Teams() {
           <tbody>
             {constructors.map((constructor, index) => (
               <tr key={constructor.Constructor.constructorId}>
+                <td>
+                  <Flag
+                    country={getFlagCode(
+                      props.flags,
+                      constructor.Constructor.nationality
+                    )}
+                  />
+                </td>
                 <td
-                onClick={() =>
-                  handleConstructorClick(
-                    constructor.Constructor.constructorId
-                  )
-                }
-                >{index + 1}</td>
+                  onClick={() =>
+                    handleConstructorClick(
+                      constructor.Constructor.constructorId
+                    )
+                  }
+                >
+                  {index + 1}
+                </td>
                 <td
                   onClick={() =>
                     handleConstructorClick(
@@ -69,12 +79,14 @@ export default function Teams() {
                   {constructor.Constructor.name}
                 </td>
                 <td
-                onClick={() =>
-                  handleConstructorClick(
-                    constructor.Constructor.constructorId
-                  )
-                }
-                >{constructor.points}</td>
+                  onClick={() =>
+                    handleConstructorClick(
+                      constructor.Constructor.constructorId
+                    )
+                  }
+                >
+                  {constructor.points}
+                </td>
                 <td>
                   <a
                     href={constructor.Constructor.url}
