@@ -5,8 +5,22 @@ import Teams from './components/Teams';
 import Team from './components/Team';
 import Races from './components/Races';
 import Race from './components/Race';
+import axios from 'axios';
 
 export default function App() {
+  const [flagsList, setFlagsList] = useState([]);
+
+  useEffect(()=>{
+    getFlagsList();
+  }, []);
+
+  const getFlagsList = async () => {
+    const url = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
+
+    const response = await axios.get(url);
+    setFlagsList(response.data);
+  }
+
   return (
     <div className='App'>
       <Router>

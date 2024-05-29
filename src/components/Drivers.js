@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import Flag from 'react-flagkit';
 
 export default function Drivers() {
     console.log('drivers');
 
 
     const [drivers, setDrivers] = useState([]);
-    const [loading, setLoading] = useState (true);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
 
@@ -28,11 +29,18 @@ export default function Drivers() {
     const handleDriverId = (id) => {
         console.log(`Constructor clicked: ${id}`);
         navigate(`/driverDetails/${id}`);
-      };
+    };
 
-    if(loading){
+    const getCountryFlag = (nationality) => {
+        const country = countryData.find(
+            (country) => country.nationality === nationality
+        );
+        return country ? country.flag : '';
+    };
+
+    if (loading) {
         return <h1>Loading...</h1>
-      }
+    }
 
     return (
         <div>
@@ -49,19 +57,26 @@ export default function Drivers() {
                         console.log(driver);
                         return (
                             <tr
-                            onClick={() =>
-                                handleDriverId(
-                                    driver.Driver.driverId
-                                )
-                              }
+                                onClick={() =>
+                                    handleDriverId(
+                                        driver.Driver.driverId
+                                    )
+                                }
                             >
-                            <td>{driver.position}</td>
-                            <td>{driver.Driver.givenName} {driver.Driver.familyName}</td>
-                            <td>{driver.Constructors[0].constructorId}</td>
-                            <td>{driver.points}</td>
-                        </tr>
+                                <td>
+                                    <img
+                                        src={getCountryFlag(driver.Driver.nationality)}
+                                        alt={driver.Driver.nationality}
+                                        style={{ width: '30px', height: '20px' }}
+                                    />
+                                </td>
+                                <td>{driver.position}</td>
+                                <td>{driver.Driver.givenName} {driver.Driver.familyName}</td>
+                                <td>{driver.Constructors[0].constructorId}</td>
+                                <td>{driver.points}</td>
+                            </tr>
                         )
- 
+
                     }
                     )}
                 </tbody>
