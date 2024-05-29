@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Flag from 'react-flagkit';
+import { getFlagCode } from '../helpers';
 
-export default function Race() {
+export default function Race(props) {
   const { raceId } = useParams();
   const [qualifyingResults, setQualifyingResults] = useState([]);
   const [raceResults, setRaceResults] = useState([]);
@@ -47,7 +49,11 @@ export default function Race() {
     <div>
       <div>
         <h1>Race Details</h1>
-        
+        <Flag
+                    country={getFlagCode(
+                      props.flags,
+                      qualifyingResults.Circuit.Location.country
+                    )}/>
           <p>Name of Race: {qualifyingResults.raceName}</p>
           <p>Country: {qualifyingResults.Circuit.Location.country}</p>
           <p>Location: {qualifyingResults.Circuit.Location.locality}</p>
@@ -70,7 +76,13 @@ export default function Race() {
           {qualifyingResults.QualifyingResults.map((result, index) => (
             <tr key={index}>
               <td>{result.position}</td>
-              <td>{result.Driver.familyName}</td>
+              <td>
+              <Flag
+                    country={getFlagCode(
+                      props.flags,
+                      result.Driver.nationality
+                    )}/>
+                {result.Driver.familyName}</td>
               <td>{result.Constructor.name}</td>
               <td>{getBestTime(result)}</td>
             </tr>
@@ -93,7 +105,13 @@ export default function Race() {
           {raceResults.map((result, index) => (
             <tr key={index}>
               <td>{result.position}</td>
-              <td>{result.Driver.familyName}</td>
+              <td>
+              <Flag
+                    country={getFlagCode(
+                      props.flags,
+                      result.Driver.nationality
+                    )}/>
+                {result.Driver.familyName}</td>
               <td>{result.Constructor.name}</td>
               <td>{result.Time?.time || 'N/A'}</td>
               <td>{result.points}</td>
