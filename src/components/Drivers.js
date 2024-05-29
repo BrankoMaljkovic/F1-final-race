@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import Flag from 'react-flagkit';
+import {getFlagCode } from "../helpers";
 
-export default function Drivers() {
-    console.log('drivers');
+export default function Drivers(props) {
+    console.log('drivers', props.flags);
 
 
     const [drivers, setDrivers] = useState([]);
@@ -31,12 +32,6 @@ export default function Drivers() {
         navigate(`/driverDetails/${id}`);
     };
 
-    const getCountryFlag = (nationality) => {
-        const country = countryData.find(
-            (country) => country.nationality === nationality
-        );
-        return country ? country.flag : '';
-    };
 
     if (loading) {
         return <h1>Loading...</h1>
@@ -64,11 +59,7 @@ export default function Drivers() {
                                 }
                             >
                                 <td>
-                                    <img
-                                        src={getCountryFlag(driver.Driver.nationality)}
-                                        alt={driver.Driver.nationality}
-                                        style={{ width: '30px', height: '20px' }}
-                                    />
+                                    <Flag country={getFlagCode(props.flags ,driver.Driver.nationality)} />
                                 </td>
                                 <td>{driver.position}</td>
                                 <td>{driver.Driver.givenName} {driver.Driver.familyName}</td>

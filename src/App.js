@@ -6,6 +6,7 @@ import Team from './components/Team';
 import Races from './components/Races';
 import Race from './components/Race';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export default function App() {
   const [flagsList, setFlagsList] = useState([]);
