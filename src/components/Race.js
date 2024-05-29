@@ -6,25 +6,21 @@ export default function Race() {
   const { raceId } = useParams();
   const [qualifyingResults, setQualifyingResults] = useState([]);
   const [raceResults, setRaceResults] = useState([]);
-  const [raceDetails, setRaceDetails] = useState(null);
   const [loading, setLoading] = useState (true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [qualifyingResponse, raceResponse, raceDetailsResponse] = await Promise.all([
+        const [qualifyingResponse, raceResponse] = await Promise.all([
           axios.get(`http://ergast.com/api/f1/2013/${raceId}/qualifying.json`),
-          axios.get(`http://ergast.com/api/f1/2013/${raceId}/results.json`),
-          axios.get(`http://ergast.com/api/f1/2013/results/1.json`)
+          axios.get(`http://ergast.com/api/f1/2013/${raceId}/results.json`)
         ]);
 
-        const qualifyingData = qualifyingResponse.data.MRData.RaceTable.Races[0].QualifyingResults;
+        const qualifyingData = qualifyingResponse.data.MRData.RaceTable.Races[0]; 
         const raceData = raceResponse.data.MRData.RaceTable.Races[0].Results;
-        const raceDetailsData = raceDetailsResponse.data.MRData.RaceTable.Races[0];
 
         setQualifyingResults(qualifyingData);
         setRaceResults(raceData);
-        setRaceDetails(raceDetailsData);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching the data', error);
@@ -40,12 +36,12 @@ export default function Race() {
     <div>
       <div>
         <h1>Race Details</h1>
-        <img src={`../img/${raceDetails.raceName.toLowerCase()}.jpg`} alt={`${raceDetails.raceName} Circuit`} />
-        <p>Name of Race: {raceDetails.raceName}</p>
-        <p>Country: {raceDetails.Circuit.Location.country}</p>
-        <p>Location: {raceDetails.Circuit.Location.locality}</p>
-        <p>Date of Race: {raceDetails.date}</p>
-        <p>Full Report: <a href={raceDetails.url}>Link to Full Report</a></p>
+        
+          <p>Name of Race: {qualifyingResults.raceName}</p>
+          <p>Country: {qualifyingResults.Circuit.Location.country}</p>
+          <p>Location: {qualifyingResults.Circuit.Location.locality}</p>
+          <p>Date of Race: {qualifyingResults.date}</p>
+          <p>Full Report: <a href={qualifyingResults.Circuit.url}>Link to Full Report</a></p>
       </div>
 
       <h1>Race Results - Round {raceId}</h1>
@@ -60,7 +56,7 @@ export default function Race() {
           </tr>
         </thead>
         <tbody>
-          {qualifyingResults.map((result, index) => (
+          {raceResults.map((result, index) => (
             <tr key={index}>
               <td>{result.position}</td>
               <td>{result.Driver.familyName}</td>
