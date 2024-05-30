@@ -48,7 +48,7 @@ export default function Team(props) {
         <div className="cards">
           <h1>Team Details</h1>
 
-          <img src={`${process.env.PUBLIC_URL}/${teamDetails.Constructor.constructorId.toLowerCase()}.png`} />
+          <img src={`${process.env.PUBLIC_URL}/img/${teamDetails.Constructor.constructorId.toLowerCase()}.png`} />
 
           <Flag
             country={getFlagCode(
