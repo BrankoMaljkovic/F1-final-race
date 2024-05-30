@@ -3,13 +3,25 @@ body {
     padding: 0;
 }
 
+/* navigacioni meni u Appu */
+
 .top-navigation {
     background-color: red;
 }
 
+/* polje prikaza komponenti u Appu */
+
+.main-view {
+    background-color: lightgrey;
+}
+
+/* stilizovanje tabele za sve prikaze */
+
 .table {
     font-size: medium;
 }
+
+/* stilizovanje kartice za sve prikaze (timovi i vozaci) */
 
 .cards {
     font-size: medium;
