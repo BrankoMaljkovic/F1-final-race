@@ -47,10 +47,9 @@ export default function Team(props) {
         {/* Team card */}
         <div className="cards">
           <h1>Team Details</h1>
-          <img
-            src={require(`../img/${teamDetails.Constructor.constructorId.toLowerCase()}.png`)}
-            alt=''
-          />
+
+          <img src={`${process.env.PUBLIC_URL}/${teamDetails.Constructor.constructorId.toLowerCase()}.png`} />
+
           <Flag
             country={getFlagCode(
               props.flags,

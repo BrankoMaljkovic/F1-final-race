@@ -49,7 +49,7 @@ export default function Driver(props) {
             <div>
                 <div className="cards">
                     <h1>Driver Details</h1>
-                    <img src={require(`../img/${driverDetails.Driver.familyName.toLowerCase()}.jpg`)} />
+                    <img src={`${process.env.PUBLIC_URL}/${driverDetails.Driver.familyName.toLowerCase()}.jpg`} />
                     <Flag country={getFlagCode(props.flags, driverDetails.Driver.nationality)} />
                     <p>Name: {`${driverDetails.Driver.givenName} ${driverDetails.Driver.familyName} `} </p>
                     <p>Nationality: {driverDetails.Driver.nationality}</p>
