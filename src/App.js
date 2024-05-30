@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 export default function App() {
   const [flagsList, setFlagsList] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     getFlagsList();
   }, []);
 
@@ -35,15 +35,18 @@ export default function App() {
           </ul>
         </nav>
 
-        <Routes>
-          <Route path='/' element={<Drivers flags={flagsList}/>} />
-          <Route path='/driverDetails/:driverId' element={<Driver flags={flagsList} /> } />
-          <Route path='/teams' element={<Teams flags={flagsList}/>} />
-          <Route path='/teamDetails/:teamId' element={<Team flags={flagsList}/>} />
-          <Route path='/races' element={<Races flags={flagsList}/>} />
-          <Route path='/race/:raceId' element={<Race flags={flagsList}/>} />
-        </Routes>
+        <div className="">
+          <Routes>
+            <Route path='/' element={<Drivers flags={flagsList} />} />
+            <Route path='/driverDetails/:driverId' element={<Driver flags={flagsList} />} />
+            <Route path='/teams' element={<Teams flags={flagsList} />} />
+            <Route path='/teamDetails/:teamId' element={<Team flags={flagsList} />} />
+            <Route path='/races' element={<Races flags={flagsList} />} />
+            <Route path='/race/:raceId' element={<Race flags={flagsList} />} />
+          </Routes>
+          </div>
       </Router>
+
     </div>
   );
 }
