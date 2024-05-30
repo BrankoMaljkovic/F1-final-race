@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Flag from 'react-flagkit';
+import { getFlagCode } from '../helpers';
 
-export default function Team() {
+export default function Team(props) {
   const [teamDetails, setTeamDetails] = useState({});
   const [teamResults, setTeamResults] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [driverNames, setDriverNames] = useState([]);
   const { teamId } = useParams();
 
   useEffect(() => {
@@ -15,44 +16,16 @@ export default function Team() {
         const teamResponse = await axios.get(
           `https://ergast.com/api/f1/2013/constructors/${teamId}/constructorStandings.json`
         );
-        const teamStandings =
-          teamResponse.data.MRData.StandingsTable.StandingsLists[0]
-            .ConstructorStandings[0];
-        setTeamDetails({
-          country: teamStandings.Constructor.nationality,
-          position: teamStandings.position,
-          points: teamStandings.points,
-        });
-
-        const driversResponse = await axios.get(
-          `https://ergast.com/api/f1/2013/constructors/${teamId}/drivers.json`
-        );
-        const drivers = driversResponse.data.MRData.DriverTable.Drivers.map(
-          (driver) => ({
-            driverId: driver.driverId,
-            name: `${driver.givenName} ${driver.familyName}`,
-          })
-        );
-        setDriverNames(drivers);
-
         const resultsResponse = await axios.get(
           `https://ergast.com/api/f1/2013/constructors/${teamId}/results.json`
         );
-        const races = resultsResponse.data.MRData.RaceTable.Races.map(
-          (race) => {
-            const resultObj = {
-              round: race.round,
-              raceName: race.raceName,
-              points: race.Results[0].points,
-            };
-            race.Results.forEach((result) => {
-              resultObj[result.Driver.driverId] = result.position;
-            });
-            return resultObj;
-          }
-        );
-        setTeamResults(races);
+        const teamStandings =
+          teamResponse.data.MRData.StandingsTable.StandingsLists[0]
+            .ConstructorStandings[0];
+        const races = resultsResponse.data.MRData.RaceTable.Races;
 
+        setTeamResults(races);
+        setTeamDetails(teamStandings);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -67,11 +40,18 @@ export default function Team() {
     return <h1>Loading...</h1>;
   }
 
+  console.log('zastavica za team ', teamDetails.Constructor.nationality);
   return (
     <div>
       <div>
         <h1>Team Details</h1>
-        <p>Country: {teamDetails.country}</p>
+        <Flag
+          country={getFlagCode(
+            props.flags,
+            teamDetails.Constructor.nationality
+          )}
+        />
+        <p>Country: {teamDetails.Constructor.nationality}</p>
         <p>Position: {teamDetails.position}</p>
         <p>Points: {teamDetails.points}</p>
 
@@ -81,21 +61,28 @@ export default function Team() {
             <tr>
               <th>Round</th>
               <th>Grand Prix</th>
-              {driverNames.map((driver) => (
-                <th key={driver.driverId}>{driver.name}</th>
-              ))}
+              <th>{teamResults[0].Results[0].Driver.familyName}</th>
+              <th>{teamResults[0].Results[1].Driver.familyName}</th>
               <th>Points</th>
             </tr>
           </thead>
           <tbody>
             {teamResults.map((race, index) => (
+              //race.Circuit.Location.country
               <tr key={index}>
                 <td>{race.round}</td>
-                <td>{race.raceName}</td>
-                {driverNames.map((driver) => (
-                  <td key={driver.driverId}>{race[driver.driverId]}</td>
-                ))}
-                <td>{race.points}</td>
+                <td>
+                  <Flag
+                    country={getFlagCode(
+                      props.flags,
+                      race.Circuit.Location.country
+                    )}
+                  />
+                  {race.raceName}
+                </td>
+                <td>{race.Results[0].position}</td>
+                <td>{race.Results[1].position}</td>
+                <td>{race.Results[0].position + race.Results[1].position}</td>
               </tr>
             ))}
           </tbody>
