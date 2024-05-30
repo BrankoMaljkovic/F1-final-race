@@ -45,6 +45,10 @@ export default function Team(props) {
     <div>
       <div>
         <h1>Team Details</h1>
+        <img
+          src={require(`../img/${teamDetails.Constructor.constructorId.toLowerCase()}.png`)}
+          alt=''
+        />
         <Flag
           country={getFlagCode(
             props.flags,
@@ -54,6 +58,9 @@ export default function Team(props) {
         <p>Country: {teamDetails.Constructor.nationality}</p>
         <p>Position: {teamDetails.position}</p>
         <p>Points: {teamDetails.points}</p>
+        <p>
+          History: <a href={teamDetails.Constructor.url}>History</a>
+        </p>
 
         <h2>Team Results</h2>
         <table>
