@@ -33,10 +33,11 @@ export default function Races(props) {
     console.log('handleRoundId', round);
     navigate(`/race/${round}`);
   };
-
+  
   if(loading){
     return <h1>Loading....</h1>
   }
+  console.log('race nationality', races);
   return (
     <div>
       <h1>Race Calendar - 2013</h1>
@@ -53,6 +54,7 @@ export default function Races(props) {
         <tbody>
           {races.map((race, index) => (
             <tr key={index} onClick={() => handleRoundId(race.round)}>
+              
               <td>
               <Flag country={getFlagCode(props.flags,
                 race.Circuit.Location.country)} />
@@ -61,7 +63,9 @@ export default function Races(props) {
               <td>{race.raceName}</td>
               <td>{race.Circuit.circuitName}</td>
               <td>{race.date}</td>
-              <td>{race.Results[0].Driver.familyName}</td>
+              <td>
+             <Flag country={getFlagCode(props.flags, race.Results[0].Driver.nationality)} />
+                {race.Results[0].Driver.familyName}</td>
             </tr>
           ))}
         </tbody>
