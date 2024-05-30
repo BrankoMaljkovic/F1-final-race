@@ -44,56 +44,64 @@ export default function Team(props) {
   return (
     <div>
       <div>
-        <h1>Team Details</h1>
-        <img
-          src={require(`../img/${teamDetails.Constructor.constructorId.toLowerCase()}.png`)}
-          alt=''
-        />
-        <Flag
-          country={getFlagCode(
-            props.flags,
-            teamDetails.Constructor.nationality
-          )}
-        />
-        <p>Country: {teamDetails.Constructor.nationality}</p>
-        <p>Position: {teamDetails.position}</p>
-        <p>Points: {teamDetails.points}</p>
-        <p>
-          History: <a href={teamDetails.Constructor.url}>History</a>
-        </p>
+        {/* Team card */}
+        <div className="cards">
+          <h1>Team Details</h1>
+          <img
+            src={require(`../img/${teamDetails.Constructor.constructorId.toLowerCase()}.png`)}
+            alt=''
+          />
+          <Flag
+            country={getFlagCode(
+              props.flags,
+              teamDetails.Constructor.nationality
+            )}
+          />
+          <p>Country: {teamDetails.Constructor.nationality}</p>
+          <p>Position: {teamDetails.position}</p>
+          <p>Points: {teamDetails.points}</p>
+          <p>
+            History: <a href={teamDetails.Constructor.url}>History</a>
+          </p>
+        </div>
 
-        <h2>Team Results</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Round</th>
-              <th>Grand Prix</th>
-              <th>{teamResults[0].Results[0].Driver.familyName}</th>
-              <th>{teamResults[0].Results[1].Driver.familyName}</th>
-              <th>Points</th>
-            </tr>
-          </thead>
-          <tbody>
-            {teamResults.map((race, index) => (
-              //race.Circuit.Location.country
-              <tr key={index}>
-                <td>{race.round}</td>
-                <td>
-                  <Flag
-                    country={getFlagCode(
-                      props.flags,
-                      race.Circuit.Location.country
-                    )}
-                  />
-                  {race.raceName}
-                </td>
-                <td>{race.Results[0].position}</td>
-                <td>{race.Results[1].position}</td>
-                <td>{race.Results[0].position + race.Results[1].position}</td>
+
+        {/* Team 1st table */}
+
+        <div className="table">
+          <h2>Team Results</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Round</th>
+                <th>Grand Prix</th>
+                <th>{teamResults[0].Results[0].Driver.familyName}</th>
+                <th>{teamResults[0].Results[1].Driver.familyName}</th>
+                <th>Points</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {teamResults.map((race, index) => (
+                //race.Circuit.Location.country
+                <tr key={index}>
+                  <td>{race.round}</td>
+                  <td>
+                    <Flag
+                      country={getFlagCode(
+                        props.flags,
+                        race.Circuit.Location.country
+                      )}
+                    />
+                    {race.raceName}
+                  </td>
+                  <td>{race.Results[0].position}</td>
+                  <td>{race.Results[1].position}</td>
+                  <td>{race.Results[0].position + race.Results[1].position}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

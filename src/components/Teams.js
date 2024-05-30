@@ -38,7 +38,8 @@ export default function Teams(props) {
 
   return (
     <div className='App'>
-      <div>
+      {/* Teams 1st table */}
+      <div className="table">
         <h1>Constructor Championship Table - 2013</h1>
         <table>
           <thead>
