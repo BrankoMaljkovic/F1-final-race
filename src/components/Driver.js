@@ -68,13 +68,13 @@ export default function Driver(props) {
                     </thead>
                     <tbody>
                         {driverRaces.map((race, index) => (
-                            //console.log(`race`, race)
+                            //console.log(`race`, driverRaces)
                             <tr key={index}>
                                 <td>{race.round}</td>
                                 <td><Flag country={getFlagCode(props.flags, race.Circuit.Location.country)} />{race.raceName}</td>
                                 <td>{race.Results[0].Constructor.name}</td>
                                 <td>{race.Results[0].grid}</td>
-                                <td>{race.Results[0].status}</td>
+                                <td>{race.Results[0].position}</td>
                             </tr>
                         ))}
                     </tbody>
