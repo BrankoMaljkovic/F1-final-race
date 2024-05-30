@@ -35,7 +35,7 @@ export default function App() {
           </ul>
         </nav>
 
-        <div className="">
+        <div className="main-view">
           <Routes>
             <Route path='/' element={<Drivers flags={flagsList} />} />
             <Route path='/driverDetails/:driverId' element={<Driver flags={flagsList} />} />
