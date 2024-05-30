@@ -36,7 +36,8 @@ export default function App() {
             </li>
           </ul>
         </nav>
-
+        
+        <div className='serach-main-view'>
         <div className="search">
           <input type="text" placeholder='Search..' />
           <SeasonYear />
@@ -51,6 +52,7 @@ export default function App() {
             <Route path='/races' element={<Races flags={flagsList} />} />
             <Route path='/race/:raceId' element={<Race flags={flagsList} />} />
           </Routes>
+        </div>
         </div>
       </Router>
 
