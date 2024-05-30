@@ -7,6 +7,7 @@ import Races from './components/Races';
 import Race from './components/Race';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import SeasonYear from './components/SeasonYear';
 
 export default function App() {
   const [flagsList, setFlagsList] = useState([]);
@@ -26,6 +27,7 @@ export default function App() {
     <div className='App'>
       <Router>
         <nav className='top-navigation'>
+          <img src='../img/Logo.jpg' alt="" />
           <ul>
             <li>
               <Link to='/'>Drivers</Link>
@@ -34,6 +36,11 @@ export default function App() {
             </li>
           </ul>
         </nav>
+
+        <div className="search">
+          <input type="text" placeholder='Search..' />
+          <SeasonYear />
+        </div>
 
         <div className="main-view">
           <Routes>
@@ -44,7 +51,7 @@ export default function App() {
             <Route path='/races' element={<Races flags={flagsList} />} />
             <Route path='/race/:raceId' element={<Race flags={flagsList} />} />
           </Routes>
-          </div>
+        </div>
       </Router>
 
     </div>

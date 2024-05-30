@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Flag from 'react-flagkit';
-import {getFlagCode} from "../helpers";
+import { getFlagCode } from "../helpers";
 
 export default function Driver(props) {
     const [driverDetails, setDriverDetails] = useState({});
@@ -45,40 +45,46 @@ export default function Driver(props) {
 
     return (
         <div>
+            {/* Driver card */}
             <div>
-                <h1>Driver Details</h1>
-                <img src={require(`../img/${driverDetails.Driver.familyName.toLowerCase()}.jpg`)} />
-                <Flag country={getFlagCode(props.flags, driverDetails.Driver.nationality)} />
-                <p>Name: {`${driverDetails.Driver.givenName} ${driverDetails.Driver.familyName} ` } </p>
-                <p>Nationality: {driverDetails.Driver.nationality}</p>
-                <p>Team: {driverDetails.Constructors[0].name}</p>
-                <p>Birth: {driverDetails.Driver.dateOfBirth}</p>
-                <p>Biography: <a href={driverDetails.Driver.url}>Link to Biography</a></p>
+                <div className="cards">
+                    <h1>Driver Details</h1>
+                    <img src={require(`../img/${driverDetails.Driver.familyName.toLowerCase()}.jpg`)} />
+                    <Flag country={getFlagCode(props.flags, driverDetails.Driver.nationality)} />
+                    <p>Name: {`${driverDetails.Driver.givenName} ${driverDetails.Driver.familyName} `} </p>
+                    <p>Nationality: {driverDetails.Driver.nationality}</p>
+                    <p>Team: {driverDetails.Constructors[0].name}</p>
+                    <p>Birth: {driverDetails.Driver.dateOfBirth}</p>
+                    <p>Biography: <a href={driverDetails.Driver.url}>Link to Biography</a></p>
+                </div>
 
-                <h2>Driver Races</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Round</th>
-                            <th>Grand Prix</th>
-                            <th>Team</th>
-                            <th>Grid</th>
-                            <th>Race</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {driverRaces.map((race, index) => (
-                            //console.log(`race`, driverRaces)
-                            <tr key={index}>
-                                <td>{race.round}</td>
-                                <td><Flag country={getFlagCode(props.flags, race.Circuit.Location.country)} />{race.raceName}</td>
-                                <td>{race.Results[0].Constructor.name}</td>
-                                <td>{race.Results[0].grid}</td>
-                                <td>{race.Results[0].position}</td>
+                {/* Driver 1st table */}
+                <div className="table">
+                    <h2>Driver Races</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Round</th>
+                                <th>Grand Prix</th>
+                                <th>Team</th>
+                                <th>Grid</th>
+                                <th>Race</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {driverRaces.map((race, index) => (
+                                //console.log(`race`, driverRaces)
+                                <tr key={index}>
+                                    <td>{race.round}</td>
+                                    <td><Flag country={getFlagCode(props.flags, race.Circuit.Location.country)} />{race.raceName}</td>
+                                    <td>{race.Results[0].Constructor.name}</td>
+                                    <td>{race.Results[0].grid}</td>
+                                    <td>{race.Results[0].position}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     );

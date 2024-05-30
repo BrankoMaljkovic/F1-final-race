@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import Flag from 'react-flagkit';
-import {getFlagCode } from "../helpers";
+import { getFlagCode } from "../helpers";
 
 export default function Drivers(props) {
     console.log('drivers', props.flags);
@@ -38,39 +38,42 @@ export default function Drivers(props) {
 
     return (
         <div>
-            <h1>Drivers Championship</h1>
-            <table>
-                <thead>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </thead>
-                <tbody>
-                    {drivers.map((driver, i) => {
-                        console.log(driver);
-                        return (
-                            <tr
-                                onClick={() =>
-                                    handleDriverId(
-                                        driver.Driver.driverId
-                                    )
-                                }
-                            >
-                                <td>
-                                    <Flag country={getFlagCode(props.flags, driver.Driver.nationality)} />
-                                </td>
-                                <td>{driver.position}</td>
-                                <td>{driver.Driver.givenName} {driver.Driver.familyName}</td>
-                                <td>{driver.Constructors[0].constructorId}</td>
-                                <td>{driver.points}</td>
-                            </tr>
-                        )
+            {/* Drivers 1st table */}
+            <div className="table">
+                <h1>Drivers Championship</h1>
+                <table>
+                    <thead>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        {drivers.map((driver, i) => {
+                            console.log(driver);
+                            return (
+                                <tr
+                                    onClick={() =>
+                                        handleDriverId(
+                                            driver.Driver.driverId
+                                        )
+                                    }
+                                >
+                                    <td>
+                                        <Flag country={getFlagCode(props.flags, driver.Driver.nationality)} />
+                                    </td>
+                                    <td>{driver.position}</td>
+                                    <td>{driver.Driver.givenName} {driver.Driver.familyName}</td>
+                                    <td>{driver.Constructors[0].constructorId}</td>
+                                    <td>{driver.points}</td>
+                                </tr>
+                            )
 
-                    }
-                    )}
-                </tbody>
-            </table>
+                        }
+                        )}
+                    </tbody>
+                </table>
+            </div>
         </div>
     )
 }
