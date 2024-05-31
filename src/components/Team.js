@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { Spin, Card, Image, Table } from 'antd';
 import Flag from 'react-flagkit';
 import { getFlagCode } from '../helpers';
 
-export default function Team(props) {
+const Team = (props) => {
   const [teamDetails, setTeamDetails] = useState({});
   const [teamResults, setTeamResults] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,75 +38,81 @@ export default function Team(props) {
   }, []);
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <Spin />;
   }
 
-  console.log('zastavica za team ', teamDetails.Constructor.nationality);
   return (
-    <div>
-      <div>
-        {/* Team card */}
-        <div className='cards'>
-          <h1>Team Details</h1>
+    <div className='team-container'>
+      {/* Team card */}
+      <Card
+        title='Team Details'
+        className='teams-details-card'
+        style={{ marginBottom: 20 }}
+      >
+        <Image
+          src={`${
+            process.env.PUBLIC_URL
+          }/img/${teamDetails.Constructor.constructorId.toLowerCase()}.png`}
+          alt='Driver_Image'
+        />
+        <Flag
+          country={getFlagCode(
+            props.flags,
+            teamDetails.Constructor.nationality
+          )}
+        />
+        <p>Country: {teamDetails.Constructor.nationality}</p>
+        <p>Position: {teamDetails.position}</p>
+        <p>Points: {teamDetails.points}</p>
+        <p>
+          History: <a href={teamDetails.Constructor.url}>History</a>
+        </p>
+      </Card>
 
-          <img
-            src={`${
-              process.env.PUBLIC_URL
-            }/img/${teamDetails.Constructor.constructorId.toLowerCase()}.png`}
-            alt='Driver_Image'
-          />
-
-          <Flag
-            country={getFlagCode(
-              props.flags,
-              teamDetails.Constructor.nationality
-            )}
-          />
-          <p>Country: {teamDetails.Constructor.nationality}</p>
-          <p>Position: {teamDetails.position}</p>
-          <p>Points: {teamDetails.points}</p>
-          <p>
-            History: <a href={teamDetails.Constructor.url}>History</a>
-          </p>
-        </div>
-
-        {/* Team 1st table */}
-
-        <div className='table'>
-          <h2>Team Results</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Round</th>
-                <th>Grand Prix</th>
-                <th>{teamResults[0].Results[0].Driver.familyName}</th>
-                <th>{teamResults[0].Results[1].Driver.familyName}</th>
-                <th>Points</th>
-              </tr>
-            </thead>
-            <tbody>
-              {teamResults.map((race, index) => (
-                //race.Circuit.Location.country
-                <tr key={index}>
-                  <td>{race.round}</td>
-                  <td>
-                    <Flag
-                      country={getFlagCode(
-                        props.flags,
-                        race.Circuit.Location.country
-                      )}
-                    />
-                    {race.raceName}
-                  </td>
-                  <td>{race.Results[0].position}</td>
-                  <td>{race.Results[1].position}</td>
-                  <td>{race.Results[0].position + race.Results[1].position}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      {/* Team results table */}
+      <Card title='Team Results'>
+        <Table
+          dataSource={teamResults.map((race) => ({
+            key: race.round,
+            round: race.round,
+            grandPrix: (
+              <div>
+                <Flag
+                  country={getFlagCode(
+                    props.flags,
+                    race.Circuit.Location.country
+                  )}
+                />
+                {race.raceName}
+              </div>
+            ),
+            driver1Position: race.Results[0].position,
+            driver2Position: race.Results[1].position,
+            totalPoints: race.Results[0].position + race.Results[1].position,
+          }))}
+          columns={[
+            { title: 'Round', dataIndex: 'round', key: 'round' },
+            { title: 'Grand Prix', dataIndex: 'grandPrix', key: 'grandPrix' },
+            {
+              title: `${teamResults[0].Results[0].Driver.familyName}`,
+              dataIndex: 'driver1Position',
+              key: 'driver1Position',
+            },
+            {
+              title: `${teamResults[0].Results[1].Driver.familyName}`,
+              dataIndex: 'driver2Position',
+              key: 'driver2Position',
+            },
+            {
+              title: 'Total Points',
+              dataIndex: 'totalPoints',
+              key: 'totalPoints',
+            },
+          ]}
+        />
+      </Card>
     </div>
   );
-}
+};
+
+export default Team;
