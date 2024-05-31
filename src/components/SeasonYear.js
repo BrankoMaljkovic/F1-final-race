@@ -18,7 +18,7 @@ export default function SeasonYear() { // treba staviti map za izvlacenje godina
 
             <Space direction="vertical">
                 <DatePicker onChange={onChange} picker="year" 
-                minDate={dayjs('2000', dateFormat)}
+                minDate={dayjs('2013', dateFormat)}
                 maxDate={dayjs(`${todayYear}`, dateFormat)}/>
             </Space>
 
