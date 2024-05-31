@@ -54,59 +54,114 @@ body {
 }
 /* stilizovanje kartice za sve prikaze (timovi i vozaci) */
 
-.cards {
-  font-size: medium;
+// .cards {
+//   font-size: medium;
+// }
+
+// .cards {
+//   background-color: #333; // tamno siva pozadina
+//   border: 1px solid #444; // malo svetlija siva za border
+//   border-radius: 8px;
+//   padding: 20px;
+//   width: 300px; // manja širina
+//   font-family: Arial, sans-serif;
+//   color: #fff; // bela boja teksta
+
+//   h1 {
+//     font-size: 1.5em;
+//     margin-bottom: 16px;
+//     color: #fff; // bela boja naslova
+//   }
+
+//   .name {
+//     font-size: 1.1em;
+//     font-weight: bold;
+//   }
+// }
+
+// .flag {
+//   width: 24px; // manja širina zastavice
+//   height: 16px; // manja visina zastavice
+//   background-size: cover;
+//   display: inline-block;
+//   margin-right: 8px;
+// }
+
+// p {
+//   margin: 8px 0;
+//   font-size: 0.9em; // malo manji font
+
+//   &.detail {
+//     margin-bottom: 8px;
+//   }
+// }
+
+// a {
+//   color: #1e90ff; // svetlo plava boja linka
+//   text-decoration: none;
+
+//   &:hover {
+//     text-decoration: underline;
+//   }
+// }
+
+// .driver-container {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// }
+
+// .driver-details-card {
+//   width: 300px;
+//   margin-bottom: 20px;
+//   background-color: #333; // tamno siva pozadina
+//   border: 1px solid #444; // malo svetlija siva za border
+//   padding: 20px;
+//   width: 300px; // manja širina
+//   font-family: Arial, sans-serif;
+//   color: #fff; // bela boja teksta
+// }
+
+// .driver-races-card {
+//   width: 100%;
+//   .flag {
+//     width: 24px; // manja širina zastavice
+//     height: 16px; // manja visina zastavice
+//     background-size: cover;
+//     display: inline-block;
+//     margin-right: 8px;
+//   }
+// }
+
+.driver-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
 }
 
-.cards {
+.driver-details-card {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
   background-color: #333; // tamno siva pozadina
   border: 1px solid #444; // malo svetlija siva za border
-  border-radius: 8px;
   padding: 20px;
   width: 300px; // manja širina
   font-family: Arial, sans-serif;
   color: #fff; // bela boja teksta
-
-  h1 {
-    font-size: 1.5em;
-    margin-bottom: 16px;
-    color: #fff; // bela boja naslova
-  }
-
-  img {
-    width: 100%;
-    height: auto;
-    margin-right: 16px;
-  }
-
-  .name {
-    font-size: 1.1em;
-    font-weight: bold;
-  }
 }
 
-.flag {
-  width: 24px; // manja širina zastavice
-  height: 16px; // manja visina zastavice
-  background-size: cover;
-  display: inline-block;
-  margin-right: 8px;
+.driver-races-card {
+  width: 100%;
 }
 
-p {
-  margin: 8px 0;
-  font-size: 0.9em; // malo manji font
-
-  &.detail {
-    margin-bottom: 8px;
-  }
+// Remove border-radius from Avatar images
+.ant-avatar {
+  border-radius: 0;
 }
 
-a {
-  color: #1e90ff; // svetlo plava boja linka
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
+// Remove border-radius from Avatar images specifically within the driver-details-card
+.driver-details-card .ant-avatar {
+  border-radius: 0;
 }

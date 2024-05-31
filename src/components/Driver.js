@@ -1,110 +1,107 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Flag from 'react-flagkit';
+import { Spin, Table, Card, Image } from 'antd';
+import axios from 'axios';
 import { getFlagCode } from '../helpers';
+import Flag from 'react-flagkit';
 
-export default function Driver(props) {
+const { Meta } = Card;
+
+const Driver = (props) => {
   const [driverDetails, setDriverDetails] = useState({});
   const [driverRaces, setDriverRaces] = useState([]);
   const [loading, setLoading] = useState(true);
   const { driverId } = useParams();
 
   useEffect(() => {
-    const getDriverDetails = async () => {
-      const url = `http://ergast.com/api/f1/2013/drivers/${driverId}/driverStandings.json`;
-      const response = await axios.get(url);
-      console.log(
-        'response final',
-        response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]
-      );
+    const fetchData = async () => {
+      try {
+        const driverDetailsResponse = await axios.get(
+          `http://ergast.com/api/f1/2013/drivers/${driverId}/driverStandings.json`
+        );
+        const driverRacesResponse = await axios.get(
+          `http://ergast.com/api/f1/2013/drivers/${driverId}/results.json`
+        );
 
-      setDriverDetails(
-        response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]
-      );
-      setLoading(false);
+        setDriverDetails(
+          driverDetailsResponse.data.MRData.StandingsTable.StandingsLists[0]
+            .DriverStandings[0]
+        );
+        setDriverRaces(driverRacesResponse.data.MRData.RaceTable.Races);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      }
     };
 
-    const getDriverRaces = async () => {
-      const url = `http://ergast.com/api/f1/2013/drivers/${driverId}/results.json`;
-      const response = await axios.get(url);
-
-      console.log('albertpark', response.data.MRData.RaceTable);
-
-      setDriverRaces(response.data.MRData.RaceTable.Races);
-    };
-
-    getDriverDetails();
-    getDriverRaces();
-  }, []);
+    fetchData();
+  }, [driverId]);
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <Spin />;
   }
 
-  return (
-    <div>
-      {/* Driver card */}
-      <div>
-        <div className='cards'>
-          <h1>Driver Details</h1>
-          <img
-            src={`${
-              process.env.PUBLIC_URL
-            }/img/${driverDetails.Driver.familyName.toLowerCase()}.jpg`}
-            alt='Driver_Image'
-          />
-          <Flag
-            country={getFlagCode(props.flags, driverDetails.Driver.nationality)}
-          />
-          <p>
-            Name:{' '}
-            {`${driverDetails.Driver.givenName} ${driverDetails.Driver.familyName} `}{' '}
-          </p>
-          <p>Nationality: {driverDetails.Driver.nationality}</p>
-          <p>Team: {driverDetails.Constructors[0].name}</p>
-          <p>Birth: {driverDetails.Driver.dateOfBirth}</p>
-          <p>
-            Biography: <a href={driverDetails.Driver.url}>Link to Biography</a>
-          </p>
-        </div>
+  console.log('zastava log', driverDetails);
 
-        {/* Driver 1st table */}
-        <div className='table'>
-          <h2>Driver Races</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Round</th>
-                <th>Grand Prix</th>
-                <th>Team</th>
-                <th>Grid</th>
-                <th>Race</th>
-              </tr>
-            </thead>
-            <tbody>
-              {driverRaces.map((race, index) => (
-                //console.log(`race`, driverRaces)
-                <tr key={index}>
-                  <td>{race.round}</td>
-                  <td>
-                    <Flag
-                      country={getFlagCode(
-                        props.flags,
-                        race.Circuit.Location.country
-                      )}
-                    />
-                    {race.raceName}
-                  </td>
-                  <td>{race.Results[0].Constructor.name}</td>
-                  <td>{race.Results[0].grid}</td>
-                  <td>{race.Results[0].position}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+  return (
+    <div className='driver-container'>
+      <Card title='Driver Details' className='driver-details-card'>
+        <Image
+          src={`${
+            process.env.PUBLIC_URL
+          }/img/${driverDetails.Driver.familyName.toLowerCase()}.jpg`}
+        />
+
+        <Flag
+          size={50}
+          country={`${getFlagCode(
+            props.flags,
+            driverDetails.Driver.nationality
+          )}`}
+        />
+        <p>Team: {driverDetails.Constructors[0].name}</p>
+        <p>Birth: {driverDetails.Driver.dateOfBirth}</p>
+        <p>
+          Biography: <a href={driverDetails.Driver.url}>Link to Biography</a>
+        </p>
+      </Card>
+
+      <Table
+        dataSource={driverRaces.map((race) => ({
+          key: race.round,
+          round: race.round,
+          grandPrix: (
+            <div>
+              <Flag
+                size={50}
+                country={`${getFlagCode(
+                  props.flags,
+                  race.Circuit.Location.country
+                )}`}
+                style={{ marginRight: '5px' }}
+              />
+              {race.raceName}
+            </div>
+          ),
+          team: race.Results[0].Constructor.name,
+          grid: race.Results[0].grid,
+          racePosition: race.Results[0].position,
+        }))}
+        columns={[
+          { title: 'Round', dataIndex: 'round', key: 'round' },
+          { title: 'Grand Prix', dataIndex: 'grandPrix', key: 'grandPrix' },
+          { title: 'Team', dataIndex: 'team', key: 'team' },
+          { title: 'Grid', dataIndex: 'grid', key: 'grid' },
+          {
+            title: 'Race Position',
+            dataIndex: 'racePosition',
+            key: 'racePosition',
+          },
+        ]}
+      />
     </div>
   );
-}
+};
+
+export default Driver;
