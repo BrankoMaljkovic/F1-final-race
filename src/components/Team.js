@@ -45,10 +45,15 @@ export default function Team(props) {
     <div>
       <div>
         {/* Team card */}
-        <div className="cards">
+        <div className='cards'>
           <h1>Team Details</h1>
 
-          <img src={`${process.env.PUBLIC_URL}/img/${teamDetails.Constructor.constructorId.toLowerCase()}.png`} />
+          <img
+            src={`${
+              process.env.PUBLIC_URL
+            }/img/${teamDetails.Constructor.constructorId.toLowerCase()}.png`}
+            alt='Driver_Image'
+          />
 
           <Flag
             country={getFlagCode(
@@ -64,10 +69,9 @@ export default function Team(props) {
           </p>
         </div>
 
-
         {/* Team 1st table */}
 
-        <div className="table">
+        <div className='table'>
           <h2>Team Results</h2>
           <table>
             <thead>
