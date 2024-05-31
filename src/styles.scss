@@ -1,76 +1,112 @@
 $primary-color: #222;
 
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 /* App prikaz */
 .App {
-    display: flex;
-    height: 100vh;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
 }
-
 
 /* navigacioni meni u Appu */
 
-.serach-main-view{
-    display: flex;
-    flex-direction: column;
-}
 .top-navigation {
-    width: 20vw;
-    height: 100%;
-    background-color: $primary-color;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    ul li a {
-        display: block;
-        text-decoration: none;
-        padding: 10px;
-        color: white;
-        font-size: 25px;
+  width: 100vw;
+  background-color: $primary-color;
+  color: white;
+  display: flex;
+  justify-content: flex-start;
+  ul {
+    display: inline;
+    li a {
+      display: inline;
+      text-decoration: none;
+      padding: 10px;
+      color: white;
+      font-size: 25px;
     }
     ul li a:hover {
-        background-color: rgb(139, 25, 27)
+      background-color: rgb(139, 25, 27);
     }
-    
-}
-
-/* search bar */
-.search {
-    display: flex;
-    height: 20px;
-    width: 80vw;
-    padding: 10px;
-    background-color: $primary-color;
-    color: white;
-    input {
-        padding: 5px;
-        border: none;
-        border-radius: 4px;
-    }
+  }
 }
 
 /* polje prikaza komponenti u Appu */
 
 .main-view {
-    background-color: lightgrey;
-    
-    
-    
+  background-color: lightgrey;
 }
 
 /* stilizovanje tabele za sve prikaze */
 
 .table {
-    font-size: medium;
+  font-size: medium;
 }
 
 /* stilizovanje kartice za sve prikaze (timovi i vozaci) */
 
 .cards {
-    font-size: medium;
+  font-size: medium;
+}
+/* stilizovanje kartice za sve prikaze (timovi i vozaci) */
+
+.cards {
+  font-size: medium;
+}
+
+.cards {
+  background-color: #333; // tamno siva pozadina
+  border: 1px solid #444; // malo svetlija siva za border
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px; // manja širina
+  font-family: Arial, sans-serif;
+  color: #fff; // bela boja teksta
+
+  h1 {
+    font-size: 1.5em;
+    margin-bottom: 16px;
+    color: #fff; // bela boja naslova
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    margin-right: 16px;
+  }
+
+  .name {
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+}
+
+.flag {
+  width: 24px; // manja širina zastavice
+  height: 16px; // manja visina zastavice
+  background-size: cover;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+p {
+  margin: 8px 0;
+  font-size: 0.9em; // malo manji font
+
+  &.detail {
+    margin-bottom: 8px;
+  }
+}
+
+a {
+  color: #1e90ff; // svetlo plava boja linka
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
