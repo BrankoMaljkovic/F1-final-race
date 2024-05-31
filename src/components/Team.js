@@ -35,7 +35,7 @@ const Team = (props) => {
     };
 
     fetchTeamData();
-  }, []);
+  }, [teamId]);
 
   if (loading) {
     return <Spin />;
