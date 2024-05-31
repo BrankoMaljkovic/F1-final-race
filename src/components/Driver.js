@@ -5,8 +5,6 @@ import axios from 'axios';
 import { getFlagCode } from '../helpers';
 import Flag from 'react-flagkit';
 
-const { Meta } = Card;
-
 const Driver = (props) => {
   const [driverDetails, setDriverDetails] = useState({});
   const [driverRaces, setDriverRaces] = useState([]);
