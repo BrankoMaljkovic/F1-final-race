@@ -34,9 +34,15 @@ export default function Drivers(props) {
     };
 
     console.log(`table`, drivers);
-
+    
+    if (loading) {
+        return <h1>Loading...</h1>
+    }
     /* Tabela code ispod  */
-
+    
+    const uniqueTeams = [...new Set(drivers.map(item => item.Constructors[0].name))];
+                console.log(`unique`,uniqueTeams);
+    
     const columns = [
         { title: '', dataIndex: 'Number', },
         {
@@ -47,9 +53,9 @@ export default function Drivers(props) {
                             text: `${driver.Driver.givenName} ${driver.Driver.familyName}`,
                             value: `${driver.Driver.givenName} ${driver.Driver.familyName}`
                         })
-                })
-        ],
-            filterMode: 'tree',
+                    })
+                ],
+                filterMode: 'tree',
             filterSearch: true,
             onFilter: (value, record) => record.name.includes(value), // setujemo record.name
             width: '30%',
@@ -57,22 +63,25 @@ export default function Drivers(props) {
         {
             title: 'Team', dataIndex: 'Team',
             filters: [
-                {
-                    text: 'London',
-                    value: 'London',
-                },
-            ],
-            onFilter: (value, record) => record.address.startsWith(value),
-            filterSearch: true,
-            width: '40%',
-        },
-        {
-            title: 'Points', dataIndex: 'Points',
-            sorter: (a, b) => a.Points - b.Points,
-        },
-    ];
-
-    const data =
+                ...uniqueTeams.map((teamName) => { // Spread Operator - za prikaz elemenata objekta (u suprotnom se prikazuje ceo objekat)
+                    return (
+                        {
+                            text: `${teamName}`,
+                            value: `${teamName}`
+                        })
+                    })
+                ],
+                onFilter: (value, record) => record.Team.startsWith(value),
+                filterSearch: true,
+                width: '40%',
+            },
+            {
+                title: 'Points', dataIndex: 'Points',
+                sorter: (a, b) => a.Points - b.Points,
+            },
+        ];
+        
+        const data =
         drivers.map((driver, i) => {
             return (
                 {
@@ -84,22 +93,19 @@ export default function Drivers(props) {
                             size={50}
                             country={getFlagCode(props.flags, driver.Driver.nationality)}
                             style={{ marginRight: '5px' }}
-                        />
+                            />
                         {driver.Driver.givenName} {driver.Driver.familyName}
                     </div>),
                     Team: `${driver.Constructors[0].name}`,
                     Points: `${driver.points}`,
                 })
-        })
-
-    const onChange = (pagination, filters, sorter, extra) => {
-        console.log('params', pagination, filters, sorter, extra);
+            })
+            
+            const onChange = (pagination, filters, sorter, extra) => {
+                console.log('params', pagination, filters, sorter, extra);
     };
-
-    if (loading) {
-        return <h1>Loading...</h1>
-    }
-
+    
+    
     return (
         <div>
             {/* Drivers 1st table */}

@@ -47,7 +47,7 @@ export function getFlagCode(flags, value){
         ||
         flag.nationality.toLowerCase() === value.toLowerCase()
     );
-    console.log('rrr', countryFlag);
+    //  console.log('rrr', countryFlag);
     return countryFlag.length === 1 ? countryFlag[0].alpha_2_code: value;
     
 
