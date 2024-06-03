@@ -73,25 +73,20 @@ export default function Teams(props) {
     constructors.map((constructor, i) => {
       return (
         {
-          // id: driver.Driver.driverId, // setovan id koji odredjuje parametar koji pozivamo u funkciji
-          // name: `${driver.Driver.givenName} ${driver.Driver.familyName}`, // record za filter
           Number: i + 1,
-          // Driver: (<div onClick={() => handleDriverId(driver.Driver.driverId)} style={{ cursor: 'pointer' }}>
-          //     <Flag
-          //         size={50}
-          //         country={getFlagCode(props.flags, driver.Driver.nationality)}
-          //         style={{ marginRight: '5px' }}
-          //         />
-          //     {driver.Driver.givenName} {driver.Driver.familyName}
-          // </div>),
-          Team: <div>
-            <Flag
-              size={50}
-              country={getFlagCode(props.flags, constructor.Constructor.nationality)}
-              style={{ marginRight: '5px' }}
-            />
-            {constructor.Constructor.name}
-          </div>,
+          Team: (
+            <div
+              onClick={() => handleConstructorClick(constructor.Constructor.constructorId)}
+              style={{ cursor: 'pointer' }}
+            >
+              <Flag
+                size={50}
+                country={getFlagCode(props.flags, constructor.Constructor.nationality)}
+                style={{ marginRight: '5px' }}
+              />
+              {constructor.Constructor.name}
+            </div>
+          ),
           url: constructor.Constructor.url,
           teamPoints: constructor.points,
           TeamFilter: constructor.Constructor.name
@@ -108,11 +103,7 @@ export default function Teams(props) {
   return (
     <div className='App'>
       {/* Teams 1st table */}
-      <Table columns={columns} dataSource={data} onChange={onChange}
-      // onRow={(record) => ({ // onRow za svaki red funkcija
-      // onClick: () => handleDriverId(record.id), // record podaci iz objekta, id je driverId
-      // })}
-      />
+      <Table columns={columns} dataSource={data} onChange={onChange} />
       
 
         {/* <table>
