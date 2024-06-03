@@ -75,6 +75,7 @@ const Team = (props) => {
           dataSource={teamResults.map((race) => ({
             key: race.round,
             round: race.round,
+            race: race.raceName,
             grandPrix: (
               <div>
                 <Flag
@@ -91,22 +92,41 @@ const Team = (props) => {
             totalPoints: race.Results[0].position + race.Results[1].position,
           }))}
           columns={[
-            { title: 'Round', dataIndex: 'round', key: 'round' },
-            { title: 'Grand Prix', dataIndex: 'grandPrix', key: 'grandPrix' },
+            { title: 'Round', dataIndex: 'round', key: 'round' ,
+            sorter: (a, b) => a.round - b.round,
+            },
+            { title: 'Grand Prix', dataIndex: 'grandPrix', key: 'grandPrix', 
+            filters: [
+              ...teamResults.map((race, i) => { // Spread Operator - za prikaz elemenata objekta (u suprotnom se prikazuje ceo objekat)
+                  return (
+                      {
+                          text: `${race.raceName}`,
+                          value: `${race.raceName}`
+                      })
+                  })
+              ],
+              filterMode: 'tree',
+          filterSearch: true,
+          onFilter: (value, record) => record.race.includes(value), // setujemo record.name
+          width: '30%',
+            },
             {
               title: `${teamResults[0].Results[0].Driver.familyName}`,
               dataIndex: 'driver1Position',
               key: 'driver1Position',
+              sorter: (a, b) => a.driver1Position - b.driver1Position,
             },
             {
               title: `${teamResults[0].Results[1].Driver.familyName}`,
               dataIndex: 'driver2Position',
               key: 'driver2Position',
+              sorter: (a, b) => a.driver2Position - b.driver2Position,
             },
             {
               title: 'Total Points',
               dataIndex: 'totalPoints',
               key: 'totalPoints',
+              sorter: (a, b) => a.totalPoints - b.totalPoints,
             },
           ]}
         />
