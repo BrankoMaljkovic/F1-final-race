@@ -79,9 +79,10 @@ export default function Drivers(props) {
                     id: driver.Driver.driverId, // setovan id koji odredjuje parametar koji pozivamo u funkciji
                     name: `${driver.Driver.givenName} ${driver.Driver.familyName}`, // record za filter
                     Number: i + 1,
-                    Driver: (<div>
-                        <Flag size={50}
-                            country={`${getFlagCode(props.flags,driver.Driver.nationality)}`}
+                    Driver: (<div onClick={() => handleDriverId(driver.Driver.driverId)} style={{ cursor: 'pointer' }}>
+                        <Flag
+                            size={50}
+                            country={getFlagCode(props.flags, driver.Driver.nationality)}
                             style={{ marginRight: '5px' }}
                         />
                         {driver.Driver.givenName} {driver.Driver.familyName}
