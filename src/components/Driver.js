@@ -33,6 +33,8 @@ const Driver = (props) => {
       }
     };
 
+    
+
     fetchData();
   }, [driverId]);
 
@@ -69,6 +71,7 @@ const Driver = (props) => {
         dataSource={driverRaces.map((race) => ({
           key: race.round,
           round: race.round,
+          race: race.raceName,
           grandPrix: (
             <div>
               <Flag
@@ -88,13 +91,28 @@ const Driver = (props) => {
         }))}
         columns={[
           { title: 'Round', dataIndex: 'round', key: 'round' },
-          { title: 'Grand Prix', dataIndex: 'grandPrix', key: 'grandPrix' },
-          { title: 'Team', dataIndex: 'team', key: 'team' },
+          { title: 'Grand Prix', dataIndex: 'grandPrix', key: 'grandPrix',
+          filters: [
+            ...driverRaces.map((race, i) => { // Spread Operator - za prikaz elemenata objekta (u suprotnom se prikazuje ceo objekat)
+                return (
+                    {
+                        text: `${race.raceName}`,
+                        value: `${race.raceName}`
+                    })
+                })
+            ],
+            filterMode: 'tree',
+        filterSearch: true,
+        onFilter: (value, record) => record.race.includes(value), // setujemo record.name
+        width: '30%',
+           },
+          { title: 'Team', dataIndex: 'team', key: 'team' }, // jedan tim je po sezoni, ne treba filter
           { title: 'Grid', dataIndex: 'grid', key: 'grid' },
           {
             title: 'Race Position',
             dataIndex: 'racePosition',
             key: 'racePosition',
+            sorter: (a, b) => a.racePosition - b.racePosition,
           },
         ]}
       />
