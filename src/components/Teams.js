@@ -89,7 +89,8 @@ export default function Teams(props) {
           ),
           url: constructor.Constructor.url,
           teamPoints: constructor.points,
-          TeamFilter: constructor.Constructor.name
+          TeamFilter: constructor.Constructor.name,
+          constId: constructor.Constructor.constructorId
         })
     })
 
@@ -103,7 +104,12 @@ export default function Teams(props) {
   return (
     <div className='App'>
       {/* Teams 1st table */}
-      <Table columns={columns} dataSource={data} onChange={onChange} />
+      <Table columns={columns} dataSource={data} onChange={onChange}
+      onRow={(record) => ({ // onRow za svaki red funkcija
+        onClick: () => handleConstructorClick(record.constId), // record podaci iz objekta, id je driverId
+        })}
+        style={{ cursor: 'pointer' }}
+        />
       
 
         {/* <table>

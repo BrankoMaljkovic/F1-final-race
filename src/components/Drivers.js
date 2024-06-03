@@ -114,7 +114,7 @@ export default function Drivers(props) {
                 <Table columns={columns} dataSource={data} onChange={onChange} 
                  onRow={(record) => ({ // onRow za svaki red funkcija
                  onClick: () => handleDriverId(record.id), // record podaci iz objekta, id je driverId
-                 })}
+                 })} style={{ cursor: 'pointer' }}
                  />
 
             </div>

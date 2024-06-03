@@ -30,6 +30,11 @@ export default function Races(props) {
     fetchRaces();
   }, []);
 
+  const handleRacesId = (id) => { // TODO dodati u tabelu ofu funkciju
+    console.log(`Constructor clicked: ${id}`);
+    navigate(`/race/${id}`);
+};
+
   // const handleRaceId = (round) => {
   //   navigate(`/race/${round}`);
   // };
@@ -103,7 +108,10 @@ export default function Races(props) {
       <div className='table'>
         <h1>Race Calendar - 2013</h1>
 
-        <Table columns={columns} dataSource={data} />
+        <Table columns={columns} dataSource={data}
+        onRow={(record) => ({ // onRow za svaki red funkcija
+          onClick: () => handleRacesId(record.round), // record podaci iz objekta, id je driverId
+          })} style={{ cursor: 'pointer' }} />
       </div>
     </div>
   );
