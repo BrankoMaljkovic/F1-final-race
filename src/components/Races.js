@@ -101,7 +101,7 @@ export default function Races(props) {
   return (
     <div>
       <div className='table'>
-        <h1>Race Calendar - 2013</h1>
+        <h1></h1>
 
         <Table columns={columns} dataSource={data} />
       </div>
