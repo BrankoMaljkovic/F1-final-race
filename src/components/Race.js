@@ -42,6 +42,8 @@ const Race = (props) => {
     return <Spin />;
   }
 
+  console.log(`QualifyingResults`, qualifyingResults)
+
   return (
     <div className='race-container'>
       {/* Race card */}
@@ -63,11 +65,25 @@ const Race = (props) => {
           columns={[
             { title: 'Pos', dataIndex: 'position', key: 'position' },
             { title: 'Driver', dataIndex: 'Driver', key: 'Driver', render: (driver) => (
-              <span>
+              <div>
                 <Flag country={getFlagCode(props.flags, driver.nationality)} />
                 {driver.familyName}
-              </span>
-            )},
+              </div>
+            ),
+            filters: [
+              ...qualifyingResults.QualifyingResults.map ((driver) =>{
+                return (
+              {
+                  value: `${driver.Driver.familyName}`,
+                  text: `${driver.Driver.familyName}`
+              })
+            })
+            ],
+              filterMode: 'tree',
+          filterSearch: true,
+          onFilter: (value, record) => record.Driver.familyName.includes(value), // setujemo record.name
+          width: '30%',
+          },
             { title: 'Team', dataIndex: 'Constructor', key: 'Constructor', render: (constructor) => constructor.name },
             { title: 'Best Time', dataIndex: '', key: 'BestTime', render: (result) => getBestTime(result) }
           ]}
@@ -85,11 +101,13 @@ const Race = (props) => {
               <span>
                 <Flag country={getFlagCode(props.flags, driver.nationality)} />
                 {driver.familyName}
-              </span>
-            )},
+              </span>),
+            },
             { title: 'Team', dataIndex: 'Constructor', key: 'Constructor', render: (constructor) => constructor.name },
             { title: 'Result', dataIndex: 'Time', key: 'Result', render: (time) => time ? time.time : 'N/A' },
-            { title: 'Points', dataIndex: 'points', key: 'points' }
+            { title: 'Points', dataIndex: 'points', key: 'points',
+              sorter: (a, b) => a.points - b.points
+             }
           ]}
           pagination={false}
         />
