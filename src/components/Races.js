@@ -2,77 +2,108 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Flag from 'react-flagkit';
-import { getFlagCode } from "../helpers";
+import { getFlagCode } from '../helpers';
+import { Table, Input, Space, Select } from 'antd';
+
+const { Option } = Select;
 
 export default function Races(props) {
-  console.log(`races`, props.flags);
-
   const [races, setRaces] = useState([]);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
+  const [filteredRaces, setFilteredRaces] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchRaces = async () => {
       try {
         const response = await axios.get(
           'http://ergast.com/api/f1/2013/results/1.json'
         );
         const raceData = response.data.MRData.RaceTable.Races;
         setRaces(raceData);
-
+        setFilteredRaces(raceData);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching the race data', error);
+        console.error('Error fetching race data:', error);
       }
     };
-    fetchData();
+    fetchRaces();
   }, []);
 
-  const handleRoundId = (round) => {
-    navigate(`/race/${round}`);
-  };
+  // const handleRaceId = (round) => {
+  //   navigate(`/race/${round}`);
+  // };
+
+  // const handleGrandPrixFilter = (value) => {
+  //   const filteredData = races.filter((race) =>
+  //     race.raceName.toLowerCase().includes(value.toLowerCase())
+  //   );
+  //   setFilteredRaces(filteredData);
+  // };
+
+  // const handleCircuitFilter = (value) => {
+  //   const filteredData = races.filter((race) =>
+  //     race.Circuit.circuitName.toLowerCase().includes(value.toLowerCase())
+  //   );
+  //   setFilteredRaces(filteredData);
+  // };
 
   if (loading) {
-    return <h1>Loading....</h1>
+    return <h1>Loading...</h1>;
   }
 
+  const columns = [
+    {
+      title: 'Round',
+      dataIndex: 'round',
+      key: 'round',
+    },
+    {
+      title: 'Grand Prix',
+      dataIndex: 'grandPrix',
+      key: 'circuitName',
+    },
+    {
+      title: 'Circuit',
+      dataIndex: 'circuitName',
+      key: 'circuit',
+    },
+    { title: 'Date', dataIndex: 'date', key: 'date' },
+    {
+      title: 'Winner',
+      dataIndex: 'winner',
+      key: 'winner',
+    },
+  ];
 
-
+  const data = filteredRaces.map((race) => ({
+    round: race.round,
+    circuitName: race.Circuit.circuitName,
+    date: race.date,
+    grandPrix: (
+      <div>
+        <Flag
+          country={getFlagCode(props.flags, race.Circuit.Location.country)}
+        />
+        {race.raceName}
+      </div>
+    ),
+    winner: (
+      <div>
+        <Flag
+          country={getFlagCode(props.flags, race.Results[0].Driver.nationality)}
+        />
+        {race.Results[0].Driver.familyName}
+      </div>
+    ),
+  }));
 
   return (
     <div>
-      {/* Teams 1st table */}
-      <div className="table">
+      <div className='table'>
         <h1>Race Calendar - 2013</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>Round</th>
-              <th>Grand Prix</th>
-              <th>Circuit</th>
-              <th>Date</th>
-              <th>Winner</th>
-            </tr>
-          </thead>
-          <tbody>
-            {races.map((race, index) => (
-              <tr key={index} onClick={() => handleRoundId(race.round)}>
 
-                <td>
-                  <Flag country={getFlagCode(props.flags,
-                    race.Circuit.Location.country)} />
-                </td>
-                <td>{race.round}</td>
-                <td>{race.raceName}</td>
-                <td>{race.Circuit.circuitName}</td>
-                <td>{race.date}</td>
-                <td>
-                  <Flag country={getFlagCode(props.flags, race.Results[0].Driver.nationality)} />
-                  {race.Results[0].Driver.familyName}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <Table columns={columns} dataSource={data} />
       </div>
     </div>
   );

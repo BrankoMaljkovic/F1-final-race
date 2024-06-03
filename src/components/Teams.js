@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Flag from 'react-flagkit';
 import { getFlagCode } from '../helpers';
 import Team from './Team';
+import { Table } from 'antd';
 
 export default function Teams(props) {
   const [constructors, setConstructors] = useState([]);
@@ -36,12 +37,85 @@ export default function Teams(props) {
     return <h1>Loading...</h1>;
   }
 
+  const columns = [
+    { title: 'Constructors', dataIndex: 'Number', },
+    {
+      title: 'Team', dataIndex: 'Team',
+      filters: [
+        ...constructors.map((team, i) => { // Spread Operator - za prikaz elemenata objekta (u suprotnom se prikazuje ceo objekat)
+          return (
+            {
+              text: `${team.Constructor.name}`,
+              value: `${team.Constructor.name}`
+            })
+        })
+      ],
+      filterMode: 'tree',
+      filterSearch: true,
+      onFilter: (value, record) => record.TeamFilter.includes(value), // setujemo record.name
+      width: '30%',
+    },
+    {
+      title: 'Details', dataIndex: ``,
+      render: (text, record) => <a
+        href={record.url}
+        target='blank' >Details</a>
+
+
+    },
+    {
+      title: 'Team Points', dataIndex: 'teamPoints',
+      sorter: (a, b) => a.teamPoints - b.teamPoints,
+    },
+  ];
+
+  const data =
+    constructors.map((constructor, i) => {
+      return (
+        {
+          // id: driver.Driver.driverId, // setovan id koji odredjuje parametar koji pozivamo u funkciji
+          // name: `${driver.Driver.givenName} ${driver.Driver.familyName}`, // record za filter
+          Number: i + 1,
+          // Driver: (<div onClick={() => handleDriverId(driver.Driver.driverId)} style={{ cursor: 'pointer' }}>
+          //     <Flag
+          //         size={50}
+          //         country={getFlagCode(props.flags, driver.Driver.nationality)}
+          //         style={{ marginRight: '5px' }}
+          //         />
+          //     {driver.Driver.givenName} {driver.Driver.familyName}
+          // </div>),
+          Team: <div>
+            <Flag
+              size={50}
+              country={getFlagCode(props.flags, constructor.Constructor.nationality)}
+              style={{ marginRight: '5px' }}
+            />
+            {constructor.Constructor.name}
+          </div>,
+          url: constructor.Constructor.url,
+          teamPoints: constructor.points,
+          TeamFilter: constructor.Constructor.name
+        })
+    })
+
+  const onChange = (pagination, filters, sorter, extra) => {
+    console.log('params', pagination, filters, sorter, extra);
+  };
+
+
+
+
   return (
     <div className='App'>
       {/* Teams 1st table */}
-      <div className="table">
-        <h1>Constructor Championship Table - 2013</h1>
-        <table>
+      <Table columns={columns} dataSource={data} onChange={onChange}
+      // onRow={(record) => ({ // onRow za svaki red funkcija
+      // onClick: () => handleDriverId(record.id), // record podaci iz objekta, id je driverId
+      // })}
+      />
+      
+
+        {/* <table>
           <thead>
             <tr>
               <th></th>
@@ -104,8 +178,8 @@ export default function Teams(props) {
               </tr>
             ))}
           </tbody>
-        </table>
-      </div>
+        </table> */}
+      {/* </div> */}
     </div>
   );
 }
