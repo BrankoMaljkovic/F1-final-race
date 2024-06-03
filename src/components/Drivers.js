@@ -41,17 +41,17 @@ export default function Drivers(props) {
         { title: '', dataIndex: 'Number', },
         {
             title: 'Driver', dataIndex: 'Driver', filters: [
-                drivers.map((driver, i) => {
+                ...drivers.map((driver, i) => { // Spread Operator - za prikaz elemenata objekta (u suprotnom se prikazuje ceo objekat)
                     return (
                         {
                             text: `${driver.Driver.givenName} ${driver.Driver.familyName}`,
                             value: `${driver.Driver.givenName} ${driver.Driver.familyName}`
                         })
                 })
-            ],
+        ],
             filterMode: 'tree',
             filterSearch: true,
-            onFilter: (value, record) => record.name.includes(value),
+            onFilter: (value, record) => record.name.includes(value), // setujemo record.name
             width: '30%',
         },
         {
@@ -76,6 +76,8 @@ export default function Drivers(props) {
         drivers.map((driver, i) => {
             return (
                 {
+                    id: driver.Driver.driverId, // setovan id koji odredjuje parametar koji pozivamo u funkciji
+                    name: `${driver.Driver.givenName} ${driver.Driver.familyName}`, // record za filter
                     Number: i + 1,
                     Driver: (<div>
                         <Flag size={50}
@@ -102,7 +104,11 @@ export default function Drivers(props) {
             {/* Drivers 1st table */}
             <div className="table">
                 <h1>Drivers Championship</h1>
-                <Table columns={columns} dataSource={data} onChange={onChange} />
+                <Table columns={columns} dataSource={data} onChange={onChange} 
+                 onRow={(record) => ({ // onRow za svaki red funkcija
+                 onClick: () => handleDriverId(record.id), // record podaci iz objekta, id je driverId
+                 })}
+                 />
 
             </div>
         </div >
