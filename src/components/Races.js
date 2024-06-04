@@ -30,10 +30,11 @@ export default function Races(props) {
     fetchRaces();
   }, []);
 
-  const handleRacesId = (id) => { // TODO dodati u tabelu ofu funkciju
+  const handleRacesId = (id) => {
+    // TODO dodati u tabelu ofu funkciju
     console.log(`Constructor clicked: ${id}`);
     navigate(`/race/${id}`);
-};
+  };
 
   // const handleRaceId = (round) => {
   //   navigate(`/race/${round}`);
@@ -57,6 +58,11 @@ export default function Races(props) {
     return <h1>Loading...</h1>;
   }
 
+  let uniqueWiner = [
+    ...new Set(races.map((item) => item.Results[0].Driver.familyName)),
+  ]; // UNIQUE Team list
+  console.log(`uniqueWiner`, uniqueWiner);
+
   const columns = [
     {
       title: 'Round',
@@ -67,24 +73,64 @@ export default function Races(props) {
       title: 'Grand Prix',
       dataIndex: 'grandPrix',
       key: 'circuitName',
+      filters: [
+        ...races.map((driver, i) => {
+          return {
+            text: `${driver.raceName}`,
+            value: `${driver.raceName}`,
+          };
+        }),
+      ],
+      filterMode: 'tree',
+      filterSearch: true,
+      onFilter: (value, record) => record.raceName.includes(value), // setujemo record.name
+      width: '30%',
     },
     {
       title: 'Circuit',
       dataIndex: 'circuitName',
       key: 'circuit',
+      filters: [
+        ...races.map((driver, i) => {
+          return {
+            text: `${driver.Circuit.circuitName}`,
+            value: `${driver.Circuit.circuitName}`,
+          };
+        }),
+      ],
+      filterMode: 'tree',
+      filterSearch: true,
+      onFilter: (value, record) => record.circuitName.includes(value), // setujemo record.name
+      width: '30%',
     },
     { title: 'Date', dataIndex: 'date', key: 'date' },
     {
       title: 'Winner',
       dataIndex: 'winner',
       key: 'winner',
+      filters: [
+        ...uniqueWiner.map((driver, i) => {
+          return {
+            text: `${driver}`,
+            value: `${driver}`,
+          };
+        }),
+      ],
+      filterMode: 'tree',
+      filterSearch: true,
+      onFilter: (
+        value,
+        record // console.log(`records`, record),
+      ) => record.winner.props.children[1].includes(value),
+      width: '30%',
     },
   ];
 
-  const data = filteredRaces.map((race) => ({
+  const data = races.map((race) => ({
     round: race.round,
     circuitName: race.Circuit.circuitName,
     date: race.date,
+    raceName: race.raceName,
     grandPrix: (
       <div>
         <Flag
@@ -108,10 +154,15 @@ export default function Races(props) {
       <div className='table'>
         <h1></h1>
 
-        <Table columns={columns} dataSource={data}
-        onRow={(record) => ({ // onRow za svaki red funkcija
-          onClick: () => handleRacesId(record.round), // record podaci iz objekta, id je driverId
-          })} style={{ cursor: 'pointer' }} />
+        <Table
+          columns={columns}
+          dataSource={data}
+          onRow={(record) => ({
+            // onRow za svaki red funkcija
+            onClick: () => handleRacesId(record.round), // record podaci iz objekta, id je driverId
+          })}
+          style={{ cursor: 'pointer' }}
+        />
       </div>
     </div>
   );

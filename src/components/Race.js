@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Spin, Card, Table } from 'antd';
 import Flag from 'react-flagkit';
-import { getFlagCode, getPositionColor } from '../helpers';
+import { getFlagCode } from '../helpers';
 
 const Race = (props) => {
   const { raceId } = useParams();
@@ -16,10 +16,11 @@ const Race = (props) => {
       try {
         const [qualifyingResponse, raceResponse] = await Promise.all([
           axios.get(`http://ergast.com/api/f1/2013/${raceId}/qualifying.json`),
-          axios.get(`http://ergast.com/api/f1/2013/${raceId}/results.json`)
+          axios.get(`http://ergast.com/api/f1/2013/${raceId}/results.json`),
         ]);
 
-        const qualifyingData = qualifyingResponse.data.MRData.RaceTable.Races[0];
+        const qualifyingData =
+          qualifyingResponse.data.MRData.RaceTable.Races[0];
         const raceData = raceResponse.data.MRData.RaceTable.Races[0].Results;
 
         setQualifyingResults(qualifyingData);
@@ -36,134 +37,176 @@ const Race = (props) => {
     const nizBestTime = [result.Q1, result.Q2, result.Q3];
     const sortBestTime = nizBestTime.sort();
     return sortBestTime[0];
-  }
+  };
 
   if (loading) {
     return <Spin />;
   }
 
-  let uniqueTeams = [...new Set(raceResults.map(item => item.Constructor.name))]; // UNIQUE Team list
-                console.log(`unique`,uniqueTeams);
+  let uniqueTeams = [
+    ...new Set(raceResults.map((item) => item.Constructor.name)),
+  ]; // UNIQUE Team list
+  console.log(`unique`, uniqueTeams);
 
-  console.log(`QualifyingResults`, qualifyingResults)
+  console.log(`QualifyingResults`, qualifyingResults);
 
   return (
     <div className='race-container'>
       {/* Race card */}
-      <Card title="Race Details" 
-      className='race-details-card'
-      style={{ marginBottom: 20 }}>
-        <Flag country={getFlagCode(props.flags, qualifyingResults.Circuit.Location.country)} />
+      <Card
+        title='Race Details'
+        className='race-details-card'
+        style={{ marginBottom: 20 }}
+      >
+        <Flag
+          country={getFlagCode(
+            props.flags,
+            qualifyingResults.Circuit.Location.country
+          )}
+        />
         <p>Name of Race: {qualifyingResults.raceName}</p>
         <p>Country: {qualifyingResults.Circuit.Location.country}</p>
         <p>Location: {qualifyingResults.Circuit.Location.locality}</p>
         <p>Date of Race: {qualifyingResults.date}</p>
-        <p>Full Report: <a href={qualifyingResults.Circuit.url}>Link to Full Report</a></p>
+        <p>
+          Full Report:{' '}
+          <a href={qualifyingResults.Circuit.url}>Link to Full Report</a>
+        </p>
       </Card>
 
       {/* Qualifying Results Table */}
-      <Card title="Qualifying Results">
+      <Card title='Qualifying Results'>
         <Table
           dataSource={qualifyingResults.QualifyingResults}
           columns={[
             { title: 'Pos', dataIndex: 'position', key: 'position' },
-            { title: 'Driver', dataIndex: 'Driver', key: 'Driver', render: (driver) => (
-              <div>
-                <Flag country={getFlagCode(props.flags, driver.nationality)} />
-                {driver.familyName}
-              </div>
-            ),
-            filters: [
-              ...qualifyingResults.QualifyingResults.map ((driver) =>{
-                return (
-              {
-                  value: `${driver.Driver.familyName}`,
-                  text: `${driver.Driver.familyName}`
-              })
-            })
-            ],
+            {
+              title: 'Driver',
+              dataIndex: 'Driver',
+              key: 'Driver',
+              render: (driver) => (
+                <div>
+                  <Flag
+                    country={getFlagCode(props.flags, driver.nationality)}
+                  />
+                  {driver.familyName}
+                </div>
+              ),
+              filters: [
+                ...qualifyingResults.QualifyingResults.map((driver) => {
+                  return {
+                    value: `${driver.Driver.familyName}`,
+                    text: `${driver.Driver.familyName}`,
+                  };
+                }),
+              ],
               filterMode: 'tree',
-          filterSearch: true,
-          onFilter: (value, record) => record.Driver.familyName.includes(value), // setujemo record.name
-          width: '30%',
-          },
-            { title: 'Team', dataIndex: 'Constructor', key: 'Constructor', render: (constructor) => constructor.name,
-            filters: [ // TREBA DA SE SREDI UNIQUE
-              ...uniqueTeams.map ((team) =>{
-                return (
-              {
-                  value: `${team}`,
-                  text: `${team}`
-              })
-            })
-            ],
+              filterSearch: true,
+              onFilter: (value, record) =>
+                record.Driver.familyName.includes(value), // setujemo record.name
+              width: '30%',
+            },
+            {
+              title: 'Team',
+              dataIndex: 'Constructor',
+              key: 'Constructor',
+              render: (constructor) => constructor.name,
+              filters: [
+                // TREBA DA SE SREDI UNIQUE
+                ...uniqueTeams.map((team) => {
+                  return {
+                    value: `${team}`,
+                    text: `${team}`,
+                  };
+                }),
+              ],
               filterMode: 'tree',
-          filterSearch: true,
-          onFilter: (value, record) => record.Driver.familyName.includes(value), // setujemo record.name
-          width: '30%',
-             },
-            { title: 'Best Time', dataIndex: '', key: 'BestTime', render: (result) => getBestTime(result) }
+              filterSearch: true,
+              onFilter: (value, record) =>
+                record.Driver.familyName.includes(value), // setujemo record.name
+              width: '30%',
+            },
+            {
+              title: 'Best Time',
+              dataIndex: '',
+              key: 'BestTime',
+              render: (result) => getBestTime(result),
+            },
           ]}
           pagination={false}
         />
       </Card>
 
       {/* Race Results Table */}
-      <Card title="Race Results">
+      <Card title='Race Results'>
         <Table
           dataSource={raceResults}
-          
           columns={[
             { title: 'Pos', dataIndex: 'position', key: 'position' },
-            { title: 'Driver', dataIndex: 'Driver', key: 'Driver', render: (driver) => (
-              <span>
-                <Flag country={getFlagCode(props.flags, driver.nationality)} />
-                {driver.familyName}
-              </span>),
-              filters: [
-                ...raceResults.map ((driver) =>{
-                  return (
-                {
-                    value: `${driver.Driver.familyName}`,
-                    text: `${driver.Driver.familyName}`
-                })
-              })
-              ],
-                filterMode: 'tree',
-            filterSearch: true,
-            onFilter: (value, record) => record.Driver.familyName.includes(value), // setujemo record.name
-            width: '30%',
-            },
-            { title: 'Team', dataIndex: 'Constructor', key: 'Constructor', render: (constructor) => constructor.name,
-            filters: [ // TREBA DA SE SREDI UNIQUE
-              ...uniqueTeams.map ((team) =>{
-                return (
-              {
-                  value: `${team}`,
-                  text: `${team}`
-              })
-            })
-            ],
-              filterMode: 'tree',
-          filterSearch: true,
-          onFilter: (value, record) => record.Driver.familyName.includes(value), // setujemo record.name
-          width: '30%',
-             },
-            { title: 'Result', dataIndex: 'Time', key: 'Result', render: (time) => time ? time.time : 'N/A' },
-            { title: 'Points', dataIndex: 'points', key: 'points',
-              sorter: (a, b) => a.points - b.points,
-              render: (text) => (
-                <div style={{ backgroundColor: getPositionColor(text) }}>
-                {text}
-                </div>
+            {
+              title: 'Driver',
+              dataIndex: 'Driver',
+              key: 'Driver',
+              render: (driver) => (
+                <span>
+                  <Flag
+                    country={getFlagCode(props.flags, driver.nationality)}
+                  />
+                  {driver.familyName}
+                </span>
               ),
-             }
+              filters: [
+                ...raceResults.map((driver) => {
+                  return {
+                    value: `${driver.Driver.familyName}`,
+                    text: `${driver.Driver.familyName}`,
+                  };
+                }),
+              ],
+              filterMode: 'tree',
+              filterSearch: true,
+              onFilter: (value, record) =>
+                record.Driver.familyName.includes(value), // setujemo record.name
+              width: '30%',
+            },
+            {
+              title: 'Team',
+              dataIndex: 'Constructor',
+              key: 'Constructor',
+              render: (constructor) => constructor.name,
+              filters: [
+                // TREBA DA SE SREDI UNIQUE
+                ...uniqueTeams.map((team) => {
+                  return {
+                    value: `${team}`,
+                    text: `${team}`,
+                  };
+                }),
+              ],
+              filterMode: 'tree',
+              filterSearch: true,
+              onFilter: (value, record) =>
+                record.Driver.familyName.includes(value), // setujemo record.name
+              width: '30%',
+            },
+            {
+              title: 'Result',
+              dataIndex: 'Time',
+              key: 'Result',
+              render: (time) => (time ? time.time : 'N/A'),
+            },
+            {
+              title: 'Points',
+              dataIndex: 'points',
+              key: 'points',
+              sorter: (a, b) => a.points - b.points,
+            },
           ]}
           pagination={false}
         />
       </Card>
     </div>
   );
-}
+};
 
 export default Race;
