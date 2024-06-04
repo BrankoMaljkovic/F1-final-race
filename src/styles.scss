@@ -65,6 +65,8 @@ body {
 
 /* stilizovanje kartice za sve prikaze (timovi i vozaci) */
 
+// MAIN CONTAINER
+
 .driver-container,
 .team-container,
 .race-container {
@@ -73,6 +75,8 @@ body {
   align-items: top;
   margin: 20px;
 }
+
+// Kartica CARD
 
 .driver-details-card,
 .teams-details-card,
@@ -88,3 +92,5 @@ body {
   font-family: Arial, sans-serif;
   color: #fff; // bela boja teksta
 }
+
+// Tabela TABLE
