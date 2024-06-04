@@ -19,126 +19,58 @@ body {
   background-color: $primary-color;
   color: white;
   display: flex;
-  justify-content: flex-start;
-  ul {
-    display: inline;
-    li a {
+  justify-content: space-between;
+  align-items: center;
+
+  .right-nav {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    margin: 15px;
+    padding: 15px;
+
+    ul {
       display: inline;
       text-decoration: none;
-      padding: 10px;
-      color: white;
-      font-size: 25px;
+      list-style: none;
+      
+      li {
+        text-decoration: none;
+        :hover {
+          background-color: rgb(139, 25, 27);
+          cursor: pointer;
+        }
+        
+        a {
+          display: inline;
+          margin: 20px;
+          text-decoration: none;
+          padding: 10px;
+          color: white;
+          font-size: 25px;
+          :hover{
+            color: blue;
+          }
+        }
+      }
     }
-    ul li a:hover {
-      background-color: rgb(139, 25, 27);
+
+    .year-select {
+      margin: 15px;
     }
   }
 }
 
-/* polje prikaza komponenti u Appu */
-
-.main-view {
-  background-color: lightgrey;
-}
-
-/* stilizovanje tabele za sve prikaze */
-
-.table {
-  font-size: medium;
-}
 
 /* stilizovanje kartice za sve prikaze (timovi i vozaci) */
-
-.cards {
-  font-size: medium;
-}
-/* stilizovanje kartice za sve prikaze (timovi i vozaci) */
-
-// .cards {
-//   font-size: medium;
-// }
-
-// .cards {
-//   background-color: #333; // tamno siva pozadina
-//   border: 1px solid #444; // malo svetlija siva za border
-//   border-radius: 8px;
-//   padding: 20px;
-//   width: 300px; // manja širina
-//   font-family: Arial, sans-serif;
-//   color: #fff; // bela boja teksta
-
-//   h1 {
-//     font-size: 1.5em;
-//     margin-bottom: 16px;
-//     color: #fff; // bela boja naslova
-//   }
-
-//   .name {
-//     font-size: 1.1em;
-//     font-weight: bold;
-//   }
-// }
-
-// .flag {
-//   width: 24px; // manja širina zastavice
-//   height: 16px; // manja visina zastavice
-//   background-size: cover;
-//   display: inline-block;
-//   margin-right: 8px;
-// }
-
-// p {
-//   margin: 8px 0;
-//   font-size: 0.9em; // malo manji font
-
-//   &.detail {
-//     margin-bottom: 8px;
-//   }
-// }
-
-// a {
-//   color: #1e90ff; // svetlo plava boja linka
-//   text-decoration: none;
-
-//   &:hover {
-//     text-decoration: underline;
-//   }
-// }
-
-// .driver-container {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-// }
-
-// .driver-details-card {
-//   width: 300px;
-//   margin-bottom: 20px;
-//   background-color: #333; // tamno siva pozadina
-//   border: 1px solid #444; // malo svetlija siva za border
-//   padding: 20px;
-//   width: 300px; // manja širina
-//   font-family: Arial, sans-serif;
-//   color: #fff; // bela boja teksta
-// }
-
-// .driver-races-card {
-//   width: 100%;
-//   .flag {
-//     width: 24px; // manja širina zastavice
-//     height: 16px; // manja visina zastavice
-//     background-size: cover;
-//     display: inline-block;
-//     margin-right: 8px;
-//   }
-// }
 
 .driver-container,
 .team-container,
 .race-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: top;
   margin: 20px;
 }
 
@@ -147,6 +79,7 @@ body {
 .race-details-card {
   width: 100%;
   max-width: 400px;
+  height: 600px;
   margin-bottom: 20px;
   background-color: #333; // tamno siva pozadina
   border: 1px solid #444; // malo svetlija siva za border
@@ -154,18 +87,4 @@ body {
   width: 300px; // manja širina
   font-family: Arial, sans-serif;
   color: #fff; // bela boja teksta
-}
-
-.driver-races-card {
-  width: 100%;
-}
-
-// Remove border-radius from Avatar images
-.ant-avatar {
-  border-radius: 0;
-}
-
-// Remove border-radius from Avatar images specifically within the driver-details-card
-.driver-details-card .ant-avatar {
-  border-radius: 0;
 }

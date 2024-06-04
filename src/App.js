@@ -29,14 +29,18 @@ export default function App() {
       <Router>
         <nav className='top-navigation'>
           <img src='../img/Logo.jpg' alt='' />
-          <ul>
-            <li>
-              <Link to='/'>Drivers</Link>
-              <Link to='/teams'>Teams</Link>
-              <Link to='/races'>Races</Link>
-            </li>
-          </ul>
-          <SeasonYear />
+          <div className='right-nav'>
+            <ul>
+              <li>
+                <Link to='/'>Drivers</Link>
+                <Link to='/teams'>Teams</Link>
+                <Link to='/races'>Races</Link>
+              </li>
+            </ul>
+            <div className='year-select'>
+              <SeasonYear />
+            </div>
+          </div>
         </nav>
 
         <div className='main-view'>
