@@ -4,6 +4,7 @@ import { Spin, Table, Card, Image } from 'antd';
 import axios from 'axios';
 import { getFlagCode } from '../helpers';
 import Flag from 'react-flagkit';
+import { getPositionColor } from '../helpers';
 
 const Driver = (props) => {
   const [driverDetails, setDriverDetails] = useState({});
@@ -113,6 +114,12 @@ const Driver = (props) => {
             dataIndex: 'racePosition',
             key: 'racePosition',
             sorter: (a, b) => a.racePosition - b.racePosition,
+            render: (text) => (
+              // console.log("render", text)
+              <span style={{ backgroundColor: getPositionColor(text) }}>
+              {text}
+              </span>
+            ),
           },
         ]}
       />

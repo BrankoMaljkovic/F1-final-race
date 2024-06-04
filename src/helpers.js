@@ -55,6 +55,35 @@ export function getFlagCode(flags, value){
    //  return country ? country.alpha_2_code : '';
 }
 
+// postion colors
+
+export function getPositionColor(value) {
+    switch(value) {
+        case "1":
+            return "hsl(162, 73%, 46%, .2)";
+        case "2":
+            return "hsl(45, 100%, 51%, .2)";
+        case "3":
+            return "hsl(354, 70%, 54%, .2)";
+        case "4":
+            return "hsl(27, 98%, 54%, .2)";
+        case "5":
+            return "hsl(27, 98%, 54%, .2)";
+        case "6":
+            return "hsl(27, 98%, 54%, .2)";
+        case "7":
+            return "hsl(27, 98%, 54%, .2)";
+        case "8":
+            return "hsl(27, 98%, 54%, .2)";
+        case "9":
+            return "hsl(27, 98%, 54%, .2)";
+        case "10":
+            return "hsl(27, 98%, 54%, .2)";
+
+    default: return "hsl(210, 11%, 71%, .2)";
+    }
+}
+
 
 
 
