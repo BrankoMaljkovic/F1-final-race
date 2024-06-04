@@ -42,6 +42,9 @@ const Race = (props) => {
     return <Spin />;
   }
 
+  let uniqueTeams = [...new Set(raceResults.map(item => item.Constructor.name))]; // UNIQUE Team list
+                console.log(`unique`,uniqueTeams);
+
   console.log(`QualifyingResults`, qualifyingResults)
 
   return (
@@ -84,7 +87,21 @@ const Race = (props) => {
           onFilter: (value, record) => record.Driver.familyName.includes(value), // setujemo record.name
           width: '30%',
           },
-            { title: 'Team', dataIndex: 'Constructor', key: 'Constructor', render: (constructor) => constructor.name },
+            { title: 'Team', dataIndex: 'Constructor', key: 'Constructor', render: (constructor) => constructor.name,
+            filters: [ // TREBA DA SE SREDI UNIQUE
+              ...uniqueTeams.map ((team) =>{
+                return (
+              {
+                  value: `${team}`,
+                  text: `${team}`
+              })
+            })
+            ],
+              filterMode: 'tree',
+          filterSearch: true,
+          onFilter: (value, record) => record.Driver.familyName.includes(value), // setujemo record.name
+          width: '30%',
+             },
             { title: 'Best Time', dataIndex: '', key: 'BestTime', render: (result) => getBestTime(result) }
           ]}
           pagination={false}
@@ -95,6 +112,7 @@ const Race = (props) => {
       <Card title="Race Results">
         <Table
           dataSource={raceResults}
+          
           columns={[
             { title: 'Pos', dataIndex: 'position', key: 'position' },
             { title: 'Driver', dataIndex: 'Driver', key: 'Driver', render: (driver) => (
@@ -102,8 +120,35 @@ const Race = (props) => {
                 <Flag country={getFlagCode(props.flags, driver.nationality)} />
                 {driver.familyName}
               </span>),
+              filters: [
+                ...raceResults.map ((driver) =>{
+                  return (
+                {
+                    value: `${driver.Driver.familyName}`,
+                    text: `${driver.Driver.familyName}`
+                })
+              })
+              ],
+                filterMode: 'tree',
+            filterSearch: true,
+            onFilter: (value, record) => record.Driver.familyName.includes(value), // setujemo record.name
+            width: '30%',
             },
-            { title: 'Team', dataIndex: 'Constructor', key: 'Constructor', render: (constructor) => constructor.name },
+            { title: 'Team', dataIndex: 'Constructor', key: 'Constructor', render: (constructor) => constructor.name,
+            filters: [ // TREBA DA SE SREDI UNIQUE
+              ...uniqueTeams.map ((team) =>{
+                return (
+              {
+                  value: `${team}`,
+                  text: `${team}`
+              })
+            })
+            ],
+              filterMode: 'tree',
+          filterSearch: true,
+          onFilter: (value, record) => record.Driver.familyName.includes(value), // setujemo record.name
+          width: '30%',
+             },
             { title: 'Result', dataIndex: 'Time', key: 'Result', render: (time) => time ? time.time : 'N/A' },
             { title: 'Points', dataIndex: 'points', key: 'points',
               sorter: (a, b) => a.points - b.points
