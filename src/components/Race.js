@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Spin, Card, Table } from 'antd';
 import Flag from 'react-flagkit';
-import { getFlagCode } from '../helpers';
+import { getFlagCode, getPositionColor } from '../helpers';
 
 const Race = (props) => {
   const { raceId } = useParams();
@@ -200,6 +200,11 @@ const Race = (props) => {
               dataIndex: 'points',
               key: 'points',
               sorter: (a, b) => a.points - b.points,
+              render: (text) => (
+                <div style={{ backgroundColor: getPositionColor(text) }}>
+                {text}
+                </div>
+              ),
             },
           ]}
           pagination={false}
