@@ -115,10 +115,9 @@ const Driver = (props) => {
             key: 'racePosition',
             sorter: (a, b) => a.racePosition - b.racePosition,
             render: (text) => (
-              // console.log("render", text)
-              <span style={{ backgroundColor: getPositionColor(text) }}>
+              <div style={{ backgroundColor: getPositionColor(text) }}>
               {text}
-              </span>
+              </div>
             ),
           },
         ]}

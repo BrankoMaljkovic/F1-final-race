@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Spin, Card, Image, Table } from 'antd';
 import Flag from 'react-flagkit';
-import { getFlagCode } from '../helpers';
+import { getFlagCode, getPositionColor } from '../helpers';
 
 const Team = (props) => {
   const [teamDetails, setTeamDetails] = useState({});
@@ -115,12 +115,22 @@ const Team = (props) => {
               dataIndex: 'driver1Position',
               key: 'driver1Position',
               sorter: (a, b) => a.driver1Position - b.driver1Position,
+              render: (text) => (
+                <div style={{ backgroundColor: getPositionColor(text) }}>
+                {text}
+                </div>
+              ),
             },
             {
               title: `${teamResults[0].Results[1].Driver.familyName}`,
               dataIndex: 'driver2Position',
               key: 'driver2Position',
               sorter: (a, b) => a.driver2Position - b.driver2Position,
+              render: (text) => (
+                <div style={{ backgroundColor: getPositionColor(text) }}>
+                {text}
+                </div>
+              ),
             },
             {
               title: 'Total Points',
