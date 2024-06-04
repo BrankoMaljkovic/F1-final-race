@@ -104,11 +104,12 @@ export default function Teams(props) {
   return (
     <div className='App'>
       {/* Teams 1st table */}
-      <Table columns={columns} dataSource={data} onChange={onChange}
+      <Table columns={columns} dataSource={data} onChange={onChange}  pagination={{ pageSize: 11 }}
       onRow={(record) => ({ // onRow za svaki red funkcija
         onClick: () => handleConstructorClick(record.constId), // record podaci iz objekta, id je driverId
         })}
         style={{ cursor: 'pointer' }}
+        // scroll={{ y: 400 }}
         />
       
 
