@@ -42,7 +42,8 @@ const Race = (props) => {
     return <Spin />;
   }
 
-  
+  let uniqueTeams = [...new Set(raceResults.map(item => item.Constructor.name))]; // UNIQUE Team list
+                console.log(`unique`,uniqueTeams);
 
   console.log(`QualifyingResults`, qualifyingResults)
 
@@ -87,12 +88,12 @@ const Race = (props) => {
           width: '30%',
           },
             { title: 'Team', dataIndex: 'Constructor', key: 'Constructor', render: (constructor) => constructor.name,
-            filters: [
-              ...qualifyingResults.QualifyingResults.map ((driver) =>{
+            filters: [ // TREBA DA SE SREDI UNIQUE
+              ...uniqueTeams.map ((team) =>{
                 return (
               {
-                  value: `${driver.Constructor.name}`,
-                  text: `${driver.Constructor.name}`
+                  value: `${team}`,
+                  text: `${team}`
               })
             })
             ],
@@ -135,11 +136,11 @@ const Race = (props) => {
             },
             { title: 'Team', dataIndex: 'Constructor', key: 'Constructor', render: (constructor) => constructor.name,
             filters: [ // TREBA DA SE SREDI UNIQUE
-              ...raceResults.map ((driver) =>{
+              ...uniqueTeams.map ((team) =>{
                 return (
               {
-                  value: `${driver.Constructor.name}`,
-                  text: `${driver.Constructor.name}`
+                  value: `${team}`,
+                  text: `${team}`
               })
             })
             ],

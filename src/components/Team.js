@@ -89,7 +89,7 @@ const Team = (props) => {
             ),
             driver1Position: race.Results[0].position,
             driver2Position: race.Results[1].position,
-            totalPoints: race.Results[0].position + race.Results[1].position,
+            totalPoints: parseInt(race.Results[0].position) + parseInt(race.Results[1].position),
           }))}
           columns={[
             { title: 'Round', dataIndex: 'round', key: 'round' ,
