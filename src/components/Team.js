@@ -53,7 +53,11 @@ const Team = (props) => {
   ];
 
   return (
-    <div>  <div><Breadcrumbs breadcrumbs={breadcrumbs} /></div>
+    <div>
+      {' '}
+      <div>
+        <Breadcrumbs breadcrumbs={breadcrumbs} />
+      </div>
       <div className='team-container'>
         {/* Team card */}
         <Card
@@ -62,8 +66,9 @@ const Team = (props) => {
           style={{ marginBottom: 20 }}
         >
           <Image
-            src={`${process.env.PUBLIC_URL
-              }/img/${teamDetails.Constructor.constructorId.toLowerCase()}.png`}
+            src={`${
+              process.env.PUBLIC_URL
+            }/img/${teamDetails.Constructor.constructorId.toLowerCase()}.png`}
             alt='Driver_Image'
           />
           <Flag
@@ -76,92 +81,106 @@ const Team = (props) => {
           <p>Position: {teamDetails.position}</p>
           <p>Points: {teamDetails.points}</p>
           <p>
-            <Flex gap="small" vertical>
-              <Flex wrap gap="small">
-                <Button type="primary" icon={<SearchOutlined />}>
-                  <a href={teamDetails.Constructor.url} target='blank'>History</a>
+            <Flex gap='small' vertical>
+              <Flex wrap gap='small'>
+                <Button type='primary' icon={<SearchOutlined />}>
+                  <a href={teamDetails.Constructor.url} target='blank'>
+                    History
+                  </a>
                 </Button>
               </Flex>
-            </Flex> 
+            </Flex>
           </p>
         </Card>
 
         {/* Team results table */}
         <div className='team-table'>
-        <Card title='Team Results'>
-          <Table
-            dataSource={teamResults.map((race) => ({
-              key: race.round,
-              round: race.round,
-              race: race.raceName,
-              grandPrix: (
-                <div style={{display: 'flex', alignItems: 'center'}}>
-                  <Flag
-                    size={50}
-                    country={getFlagCode(
-                      props.flags,
-                      race.Circuit.Location.country
-                    )}
-                  />
-                  {race.raceName}
-                </div>
-              ),
-              driver1Position: race.Results[0].position,
-              driver2Position: race.Results[1].position,
-              totalPoints: parseInt(race.Results[0].position) + parseInt(race.Results[1].position),
-            }))}
-            columns={[
-              {
-                title: 'Round', dataIndex: 'round', key: 'round',
-                sorter: (a, b) => a.round - b.round,
-              },
-              {
-                title: 'Grand Prix', dataIndex: 'grandPrix', key: 'grandPrix',
-                filters: [
-                  ...teamResults.map((race, i) => { // Spread Operator - za prikaz elemenata objekta (u suprotnom se prikazuje ceo objekat)
-                    return (
-                      {
+          <Card title='Team Results'>
+            <Table
+              dataSource={teamResults.map((race) => ({
+                key: race.round,
+                round: race.round,
+                race: race.raceName,
+                grandPrix: (
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <Flag
+                      size={50}
+                      country={getFlagCode(
+                        props.flags,
+                        race.Circuit.Location.country
+                      )}
+                    />
+                    {race.raceName}
+                  </div>
+                ),
+                driver1Position: race.Results[0].position,
+                driver2Position: race.Results[1].position,
+                totalPoints:
+                  parseInt(race.Results[0].position) +
+                  parseInt(race.Results[1].position),
+              }))}
+              columns={[
+                {
+                  title: 'Round',
+                  dataIndex: 'round',
+                  key: 'round',
+                  sorter: (a, b) => a.round - b.round,
+                },
+                {
+                  title: 'Grand Prix',
+                  dataIndex: 'grandPrix',
+                  key: 'grandPrix',
+                  filters: [
+                    ...teamResults.map((race, i) => {
+                      // Spread Operator - za prikaz elemenata objekta (u suprotnom se prikazuje ceo objekat)
+                      return {
                         text: `${race.raceName}`,
-                        value: `${race.raceName}`
-                      })
-                  })
-                ],
-                filterMode: 'tree',
-                filterSearch: true,
-                onFilter: (value, record) => record.race.includes(value), // setujemo record.name
-                width: '30%',
-              },
-              {
-                title: `${teamResults[0].Results[0].Driver.familyName}`,
-                dataIndex: 'driver1Position',
-                key: 'driver1Position',
-                sorter: (a, b) => a.driver1Position - b.driver1Position,
-                render: (text) => (
-                  <div style={{ backgroundColor: getPositionColor(text) }}>
-                    {text}
-                  </div>
-                ),
-              },
-              {
-                title: `${teamResults[0].Results[1].Driver.familyName}`,
-                dataIndex: 'driver2Position',
-                key: 'driver2Position',
-                sorter: (a, b) => a.driver2Position - b.driver2Position,
-                render: (text) => (
-                  <div style={{ backgroundColor: getPositionColor(text) }}>
-                    {text}
-                  </div>
-                ),
-              },
-              {
-                title: 'Total Points',
-                dataIndex: 'totalPoints',
-                key: 'totalPoints',
-                sorter: (a, b) => a.totalPoints - b.totalPoints,
-              },
-            ]}
-          />
-        </Card>
+                        value: `${race.raceName}`,
+                      };
+                    }),
+                  ],
+                  filterMode: 'tree',
+                  filterSearch: true,
+                  onFilter: (value, record) => record.race.includes(value), // setujemo record.name
+                  width: '30%',
+                },
+                {
+                  title: `${teamResults[0].Results[0].Driver.familyName}`,
+                  dataIndex: 'driver1Position',
+                  key: 'driver1Position',
+                  sorter: (a, b) => a.driver1Position - b.driver1Position,
+                  render: (text) => (
+                    <div
+                      className='color'
+                      style={{ backgroundColor: getPositionColor(text) }}
+                    >
+                      {text}
+                    </div>
+                  ),
+                },
+                {
+                  title: `${teamResults[0].Results[1].Driver.familyName}`,
+                  dataIndex: 'driver2Position',
+                  key: 'driver2Position',
+                  sorter: (a, b) => a.driver2Position - b.driver2Position,
+                  render: (text) => (
+                    <div
+                      className='color'
+                      style={{ backgroundColor: getPositionColor(text) }}
+                    >
+                      {text}
+                    </div>
+                  ),
+                },
+                {
+                  title: 'Total Points',
+                  dataIndex: 'totalPoints',
+                  key: 'totalPoints',
+                  sorter: (a, b) => a.totalPoints - b.totalPoints,
+                },
+              ]}
+            />
+          </Card>
         </div>
       </div>
     </div>
@@ -170,17 +189,13 @@ const Team = (props) => {
 
 export default Team;
 
-
-<Flex gap="small" vertical>
-  <Flex wrap gap="small">
-
-    <Button type="primary" icon={<SearchOutlined />}>
+<Flex gap='small' vertical>
+  <Flex wrap gap='small'>
+    <Button type='primary' icon={<SearchOutlined />}>
       Search
     </Button>
-    <Tooltip title="search">
-      <Button shape="circle" icon={<SearchOutlined />} />
+    <Tooltip title='search'>
+      <Button shape='circle' icon={<SearchOutlined />} />
     </Tooltip>
-
   </Flex>
-</Flex>
-
+</Flex>;

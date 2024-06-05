@@ -85,11 +85,22 @@ body {
 // Kartica CARD
 
 .driver-details-card,
-.teams-details-card,
+.teams-details-card {
+  width: 100%;
+  max-width: 400px;
+  height: 700px;
+  margin-bottom: 20px;
+  background-color: #333; // tamno siva pozadina
+  border: 1px solid #444; // malo svetlija siva za border
+  padding: 20px;
+  width: 400px; // manja širina
+  font-family: Arial, sans-serif;
+  color: #fff; // bela boja teksta
+}
 .race-details-card {
   width: 100%;
   max-width: 400px;
-  height: 600px;
+  height: 700px;
   margin-bottom: 20px;
   background-color: #333; // tamno siva pozadina
   border: 1px solid #444; // malo svetlija siva za border
@@ -146,4 +157,9 @@ body {
 
 .ant-table-cell {
   text-align: center;
+}
+.color {
+  border: 1px solid getPositionColor;
+  padding: 20px;
+  border-radius: 50px;
 }
