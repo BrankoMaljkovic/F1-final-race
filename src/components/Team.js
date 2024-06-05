@@ -96,6 +96,7 @@ const Team = (props) => {
               grandPrix: (
                 <div style={{display: 'flex', alignItems: 'center'}}>
                   <Flag
+                    size={50}
                     country={getFlagCode(
                       props.flags,
                       race.Circuit.Location.country

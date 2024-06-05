@@ -71,6 +71,7 @@ const Race = (props) => {
         style={{ marginBottom: 20 }}
       >
         <Flag
+          size={50}
           country={getFlagCode(
             props.flags,
             qualifyingResults.Circuit.Location.country
@@ -104,6 +105,7 @@ const Race = (props) => {
               render: (driver) => (
                 <div style={{display: 'flex', alignItems: 'center'}}>
                   <Flag
+                    size={50}
                     country={getFlagCode(props.flags, driver.nationality)}
                   />
                   {driver.familyName}
@@ -167,6 +169,7 @@ const Race = (props) => {
               render: (driver) => (
                 <span>
                   <Flag
+                    size={50}
                     country={getFlagCode(props.flags, driver.nationality)}
                   />
                   {driver.familyName}

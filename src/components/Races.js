@@ -111,7 +111,8 @@ export default function Races(props) {
       onFilter: (value, record) => record.circuitName.includes(value), // setujemo record.name
       width: '30%',
     },
-    { title: 'Date', dataIndex: 'date', key: 'date' },
+    { title: 'Date', dataIndex: 'date', key: 'date', width: 200, 
+      render: (text) => <span style={{ width: '200px', display: 'inline-block' }}>{text}</span>, },
     {
       title: 'Winner',
       dataIndex: 'winner',
@@ -142,6 +143,7 @@ export default function Races(props) {
     grandPrix: (
       <div style={{display: 'flex', alignItems: 'center'}}>
         <Flag
+          size={50}
           country={getFlagCode(props.flags, race.Circuit.Location.country)}
         />
         {race.raceName}
@@ -150,6 +152,7 @@ export default function Races(props) {
     winner: (
       <div style={{display: 'flex', alignItems: 'center'}}>
         <Flag
+          size={50}
           country={getFlagCode(props.flags, race.Results[0].Driver.nationality)}
         />
         {race.Results[0].Driver.familyName}
