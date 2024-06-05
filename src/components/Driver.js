@@ -5,6 +5,7 @@ import axios from 'axios';
 import { getFlagCode } from '../helpers';
 import Flag from 'react-flagkit';
 import { getPositionColor } from '../helpers';
+import Breadcrumbs from './Breadcrumb';
 
 const Driver = (props) => {
   const [driverDetails, setDriverDetails] = useState({});
@@ -34,8 +35,7 @@ const Driver = (props) => {
       }
     };
 
-    
-
+  
     fetchData();
   }, [driverId]);
 
@@ -43,10 +43,18 @@ const Driver = (props) => {
     return <Spin />;
   }
 
+  const breadcrumbs = [
+    {label: 'Home'},
+    { label: 'Drivers', link: '/' },
+    { label: 'Teams', link: '/teams '},
+    { label: 'Races', link: '/races' },
+    ];
+
   console.log('zastava log', driverDetails);
 
   return (
     <div className='driver-container'>
+      <Breadcrumbs breadcrumbs={breadcrumbs}/>
       <Card title='Driver Details' className='driver-details-card'>
         <Image
           src={`${
@@ -68,7 +76,7 @@ const Driver = (props) => {
         </p>
       </Card>
 
-      <Table
+      <Table 
         dataSource={driverRaces.map((race) => ({
           key: race.round,
           round: race.round,

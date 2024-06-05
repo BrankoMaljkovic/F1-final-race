@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Flag from 'react-flagkit';
 import { getFlagCode } from '../helpers';
 import { Table, Input, Space, Select } from 'antd';
+import Breadcrumbs from './Breadcrumb';
 
 const { Option } = Select;
 
@@ -57,6 +58,13 @@ export default function Races(props) {
   if (loading) {
     return <h1>Loading...</h1>;
   }
+
+  const breadcrumbs = [
+    {label: 'Home'},
+    { label: 'Drivers', link: '/' },
+    { label: 'Teams', link: '/teams '},
+    { label: 'Races', link: '/races' },
+    ];
 
   let uniqueWiner = [
     ...new Set(races.map((item) => item.Results[0].Driver.familyName)),
@@ -151,6 +159,7 @@ export default function Races(props) {
 
   return (
     <div>
+      <Breadcrumbs breadcrumbs={breadcrumbs}/>
       <div className='table'>
         <h1></h1>
 

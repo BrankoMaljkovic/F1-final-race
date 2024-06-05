@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Spin, Card, Image, Table } from 'antd';
 import Flag from 'react-flagkit';
 import { getFlagCode, getPositionColor } from '../helpers';
+import Breadcrumbs from './Breadcrumb';
 
 const Team = (props) => {
   const [teamDetails, setTeamDetails] = useState({});
@@ -41,8 +42,16 @@ const Team = (props) => {
     return <Spin />;
   }
 
+  const breadcrumbs = [
+    {label: 'Home'},
+    { label: 'Drivers', link: '/' },
+    { label: 'Teams', link: '/teams '},
+    { label: 'Races', link: '/races' },
+    ];
+
   return (
     <div className='team-container'>
+      <Breadcrumbs breadcrumbs={breadcrumbs}/>
       {/* Team card */}
       <Card
         title='Team Details'

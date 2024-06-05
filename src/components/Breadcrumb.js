@@ -33,3 +33,5 @@ export default Breadcrumbs;
 
 // pozvati u svakom komponenti
 // <Breadcrumb />
+
+// <Breadcrumb breadcrumbs={props.breadcrumbs}/>

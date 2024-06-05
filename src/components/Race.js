@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Spin, Card, Table } from 'antd';
 import Flag from 'react-flagkit';
 import { getFlagCode, getPositionColor } from '../helpers';
+import Breadcrumbs from './Breadcrumb';
 
 const Race = (props) => {
   const { raceId } = useParams();
@@ -43,6 +44,13 @@ const Race = (props) => {
     return <Spin />;
   }
 
+  const breadcrumbs = [
+    {label: 'Home'},
+    { label: 'Drivers', link: '/' },
+    { label: 'Teams', link: '/teams '},
+    { label: 'Races', link: '/races' },
+    ];
+
   let uniqueTeams = [
     ...new Set(raceResults.map((item) => item.Constructor.name)),
   ]; // UNIQUE Team list
@@ -52,6 +60,7 @@ const Race = (props) => {
 
   return (
     <div className='race-container'>
+      <Breadcrumbs breadcrumbs={breadcrumbs}/>
       {/* Race card */}
       <Card
         title='Race Details'
