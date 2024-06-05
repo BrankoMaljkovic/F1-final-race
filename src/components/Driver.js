@@ -45,17 +45,16 @@ const Driver = (props) => {
   const breadcrumbs = [
     { label: 'Home' },
     { label: 'Drivers', link: '/' },
-    { label: 'Teams', link: '/teams ' },
-    { label: 'Races', link: '/races' },
+    { label: `${driverDetails.Driver.familyName}`}
   ];
 
   console.log('zastava log', driverDetails);
 
   return (
-    <div className='driver-container'>
-      <div className='bred-div'>
+      <div><div className='bred-div'>
         <Breadcrumbs breadcrumbs={breadcrumbs} />
       </div>
+    <div className='driver-container'>
       <Card title='Driver Details' className='driver-details-card'>
         <Image
           src={`${
@@ -136,6 +135,7 @@ const Driver = (props) => {
           ]}
         />
       </div>
+    </div>
     </div>
   );
 };
