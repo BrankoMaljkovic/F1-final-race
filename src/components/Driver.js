@@ -69,6 +69,7 @@ const Driver = (props) => {
             driverDetails.Driver.nationality
           )}`}
         />
+        <p>Name: {driverDetails.Driver.givenName} {driverDetails.Driver.familyName}</p>
         <p>Team: {driverDetails.Constructors[0].name}</p>
         <p>Birth: {driverDetails.Driver.dateOfBirth}</p>
         <p>
