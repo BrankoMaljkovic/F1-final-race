@@ -78,7 +78,7 @@ const Driver = (props) => {
         <Flex gap="small" vertical>
               <Flex wrap gap="small">
                 <Button type="primary" icon={<SearchOutlined />}>
-                <a href={driverDetails.Driver.url}>Biography</a>
+                <a href={driverDetails.Driver.url} target='blank'>Biography</a>
                 </Button>
               </Flex>
             </Flex> 

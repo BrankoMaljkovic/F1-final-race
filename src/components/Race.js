@@ -5,6 +5,8 @@ import { Spin, Card, Table } from 'antd';
 import Flag from 'react-flagkit';
 import { getFlagCode, getPositionColor } from '../helpers';
 import Breadcrumbs from './Breadcrumb';
+import { SearchOutlined } from '@ant-design/icons';
+import { Button, Flex, Tooltip } from 'antd';
 
 const Race = (props) => {
   const { raceId } = useParams();
@@ -78,8 +80,13 @@ const Race = (props) => {
         <p>Location: {qualifyingResults.Circuit.Location.locality}</p>
         <p>Date of Race: {qualifyingResults.date}</p>
         <p>
-          Full Report:{' '}
-          <a href={qualifyingResults.Circuit.url}>Link to Full Report</a>
+        <Flex gap="small" vertical>
+              <Flex wrap gap="small">
+                <Button type="primary" icon={<SearchOutlined />}>
+                <a href={qualifyingResults.Circuit.url} target='blank'>Race Report</a>
+                </Button>
+              </Flex>
+            </Flex> 
         </p>
       </Card>
 

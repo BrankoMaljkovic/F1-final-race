@@ -78,7 +78,7 @@ const Team = (props) => {
             <Flex gap="small" vertical>
               <Flex wrap gap="small">
                 <Button type="primary" icon={<SearchOutlined />}>
-                  <a href={teamDetails.Constructor.url}>History</a>
+                  <a href={teamDetails.Constructor.url} target='blank'>History</a>
                 </Button>
               </Flex>
             </Flex> 
