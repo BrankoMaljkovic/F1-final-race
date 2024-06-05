@@ -147,3 +147,8 @@ body {
 .ant-table-cell {
   text-align: center;
 }
+.color {
+  border: 1px solid getPositionColor;
+  padding: 20px;
+  border-radius: 50px;
+}
