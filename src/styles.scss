@@ -116,11 +116,13 @@ body {
 // }
 // Tabela TABLE
 
-.driver-table {
+.driver-table,
+.team-table {
   width: 100%;
   border-collapse: collapse;
   justify-content: stretch;
   align-items: center;
 }
+
 .bred-div {
 }
