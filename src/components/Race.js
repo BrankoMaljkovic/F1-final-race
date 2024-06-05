@@ -74,7 +74,7 @@ const Race = (props) => {
           style={{ marginBottom: 20 }}
         >
           <Flag
-            size={50}
+            size={100}
             country={getFlagCode(
               props.flags,
               qualifyingResults.Circuit.Location.country
