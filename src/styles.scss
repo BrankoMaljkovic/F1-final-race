@@ -124,5 +124,26 @@ body {
   align-items: center;
 }
 
-.bred-div {
+.team-table .ant-table {
+  text-align: center;
+}
+
+.team-table .ant-table-thead th {
+  text-align: center;
+}
+
+.team-table .ant-table-tbody td {
+  text-align: center;
+}
+
+.team-table .ant-table-tbody .ant-table-cell {
+  vertical-align: middle;
+}
+
+.ant-table {
+  text-align: center;
+}
+
+.ant-table-cell {
+  text-align: center;
 }
