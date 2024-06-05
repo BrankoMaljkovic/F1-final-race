@@ -86,6 +86,7 @@ const Team = (props) => {
         </Card>
 
         {/* Team results table */}
+        <div className='team-table'>
         <Card title='Team Results'>
           <Table
             dataSource={teamResults.map((race) => ({
@@ -159,6 +160,7 @@ const Team = (props) => {
             ]}
           />
         </Card>
+        </div>
       </div>
     </div>
   );
