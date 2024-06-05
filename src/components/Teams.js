@@ -38,11 +38,10 @@ export default function Teams(props) {
     return <h1>Loading...</h1>;
   }
 
+    // Breadcrumb - promenjiva sa detaljima
   const breadcrumbs = [
-    {label: 'Home'},
-    { label: 'Drivers', link: '/' },
-    { label: 'Teams', link: '/teams '},
-    { label: 'Races', link: '/races' },
+    {label: 'Home', link: '/'},
+    { label: 'Teams'},
     ];
 
   const columns = [
