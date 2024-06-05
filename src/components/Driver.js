@@ -6,6 +6,8 @@ import { getFlagCode } from '../helpers';
 import Flag from 'react-flagkit';
 import { getPositionColor } from '../helpers';
 import Breadcrumbs from './Breadcrumb';
+import { SearchOutlined } from '@ant-design/icons';
+import { Button, Flex, Tooltip } from 'antd';
 
 const Driver = (props) => {
   const [driverDetails, setDriverDetails] = useState({});
@@ -73,7 +75,13 @@ const Driver = (props) => {
         <p>Team: {driverDetails.Constructors[0].name}</p>
         <p>Birth: {driverDetails.Driver.dateOfBirth}</p>
         <p>
-          Biography: <a href={driverDetails.Driver.url}>Link to Biography</a>
+        <Flex gap="small" vertical>
+              <Flex wrap gap="small">
+                <Button type="primary" icon={<SearchOutlined />}>
+                <a href={driverDetails.Driver.url}>Biography</a>
+                </Button>
+              </Flex>
+            </Flex> 
         </p>
       </Card>
 
