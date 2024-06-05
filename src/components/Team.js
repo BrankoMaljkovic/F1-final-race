@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Spin, Card, Image, Table } from 'antd';
 import Flag from 'react-flagkit';
 import { getFlagCode, getPositionColor } from '../helpers';
+import Breadcrumbs from './Breadcrumb';
 
 const Team = (props) => {
   const [teamDetails, setTeamDetails] = useState({});
@@ -41,7 +42,15 @@ const Team = (props) => {
     return <Spin />;
   }
 
+  // Breadcrumb - promenjiva sa detaljima
+  const breadcrumbs = [
+    {label: 'Home', link: '/'},
+    { label: 'Teams', link: '/teams'},
+    { label: `${teamDetails.Constructor.name}`},
+    ];
+
   return (
+    <div>  <div><Breadcrumbs breadcrumbs={breadcrumbs}/></div>
     <div className='team-container'>
       {/* Team card */}
       <Card
@@ -141,6 +150,7 @@ const Team = (props) => {
           ]}
         />
       </Card>
+    </div>
     </div>
   );
 };

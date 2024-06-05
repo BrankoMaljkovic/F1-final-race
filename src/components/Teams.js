@@ -5,6 +5,7 @@ import Flag from 'react-flagkit';
 import { getFlagCode } from '../helpers';
 import Team from './Team';
 import { Table } from 'antd';
+import Breadcrumbs from './Breadcrumb';
 
 export default function Teams(props) {
   const [constructors, setConstructors] = useState([]);
@@ -36,6 +37,12 @@ export default function Teams(props) {
   if (loading) {
     return <h1>Loading...</h1>;
   }
+
+    // Breadcrumb - promenjiva sa detaljima
+  const breadcrumbs = [
+    {label: 'Home', link: '/'},
+    { label: 'Teams'},
+    ];
 
   const columns = [
     { title: 'Constructors', dataIndex: 'Number', },
@@ -103,6 +110,7 @@ export default function Teams(props) {
 
   return (
     <div className='App'>
+      <Breadcrumbs breadcrumbs={breadcrumbs}/>
       {/* Teams 1st table */}
       <Table columns={columns} dataSource={data} onChange={onChange}  pagination={{ pageSize: 11 }}
       onRow={(record) => ({ // onRow za svaki red funkcija

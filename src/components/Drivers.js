@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Flag from 'react-flagkit';
 import { getFlagCode } from "../helpers";
 import { Table } from 'antd';
+import Breadcrumbs from './Breadcrumb';
 
 export default function Drivers(props) {
     console.log('drivers', props.flags);
@@ -38,6 +39,13 @@ export default function Drivers(props) {
     if (loading) {
         return <h1>Loading...</h1>
     }
+
+    // Breadcrumb - promenjiva sa detaljima
+    const breadcrumbs = [
+        {label: 'Home'},
+        { label: 'Drivers' },
+        ];
+
     /* Tabela code ispod  */
     
     const uniqueTeams = [...new Set(drivers.map(item => item.Constructors[0].name))];
@@ -108,6 +116,7 @@ export default function Drivers(props) {
     
     return (
         <div>
+            <Breadcrumbs breadcrumbs={breadcrumbs}/>
             {/* Drivers 1st table */}
             <div className="table">
                 <h1>Drivers Championship</h1>

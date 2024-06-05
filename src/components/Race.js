@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Spin, Card, Table } from 'antd';
 import Flag from 'react-flagkit';
 import { getFlagCode, getPositionColor } from '../helpers';
+import Breadcrumbs from './Breadcrumb';
 
 const Race = (props) => {
   const { raceId } = useParams();
@@ -43,6 +44,13 @@ const Race = (props) => {
     return <Spin />;
   }
 
+  // Breadcrumb - promenjiva sa detaljima
+  const breadcrumbs = [
+    {label: 'Home', link: '/'},
+    { label: 'Races', link: '/races' },
+    { label: `${qualifyingResults.raceName}`},
+    ];
+
   let uniqueTeams = [
     ...new Set(raceResults.map((item) => item.Constructor.name)),
   ]; // UNIQUE Team list
@@ -51,6 +59,7 @@ const Race = (props) => {
   console.log(`QualifyingResults`, qualifyingResults);
 
   return (
+      <div><div><Breadcrumbs breadcrumbs={breadcrumbs}/></div>
     <div className='race-container'>
       {/* Race card */}
       <Card
@@ -210,6 +219,7 @@ const Race = (props) => {
           pagination={false}
         />
       </Card>
+    </div>
     </div>
   );
 };
