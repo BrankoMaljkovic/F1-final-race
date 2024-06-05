@@ -71,7 +71,7 @@ export default function Drivers(props) {
             width: '30%',
         },
         {
-            title: 'Team', dataIndex: 'Team',
+            title: 'Team', dataIndex: 'Team', align: 'center',
             filters: [
                 ...uniqueTeams.map((teamName) => { // Spread Operator - za prikaz elemenata objekta (u suprotnom se prikazuje ceo objekat)
                     return (
@@ -86,7 +86,7 @@ export default function Drivers(props) {
                 width: '40%',
             },
             {
-                title: 'Points', dataIndex: 'Points',
+                title: 'Points', dataIndex: 'Points', align: 'center',
                 sorter: (a, b) => a.Points - b.Points,
             },
         ];

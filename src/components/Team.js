@@ -7,6 +7,7 @@ import { getFlagCode, getPositionColor } from '../helpers';
 import Breadcrumbs from './Breadcrumb';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Flex, Tooltip } from 'antd';
+import F1Loader from './F1Loader';
 
 const Team = (props) => {
   const [teamDetails, setTeamDetails] = useState({});
@@ -41,7 +42,7 @@ const Team = (props) => {
   }, [teamId]);
 
   if (loading) {
-    return <Spin />;
+    return < F1Loader />;
   }
 
   // Breadcrumb - promenjiva sa detaljima

@@ -46,7 +46,7 @@ export default function Teams(props) {
     ];
 
   const columns = [
-    { title: 'Constructors', dataIndex: 'Number', },
+    { title: 'Constructors', dataIndex: 'Number', align: 'center' },
     {
       title: 'Team', dataIndex: 'Team',
       filters: [
@@ -64,7 +64,7 @@ export default function Teams(props) {
       width: '30%',
     },
     {
-      title: 'Details', dataIndex: ``,
+      title: 'Details', dataIndex: ``, align: 'center',
       render: (text, record) => <a
         href={record.url}
         target='blank' >Details</a>
@@ -72,7 +72,7 @@ export default function Teams(props) {
 
     },
     {
-      title: 'Team Points', dataIndex: 'teamPoints',
+      title: 'Team Points', dataIndex: 'teamPoints', align: 'center',
       sorter: (a, b) => a.teamPoints - b.teamPoints,
     },
   ];

@@ -98,6 +98,7 @@ export default function Races(props) {
       title: 'Circuit',
       dataIndex: 'circuitName',
       key: 'circuit',
+      align: 'center',
       filters: [
         ...races.map((driver, i) => {
           return {
@@ -111,7 +112,7 @@ export default function Races(props) {
       onFilter: (value, record) => record.circuitName.includes(value), // setujemo record.name
       width: '30%',
     },
-    { title: 'Date', dataIndex: 'date', key: 'date', width: 200, 
+    { title: 'Date', dataIndex: 'date', key: 'date', width: 200, align: 'center',
       render: (text) => <span style={{ width: '200px', display: 'inline-block' }}>{text}</span>, },
     {
       title: 'Winner',
