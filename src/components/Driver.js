@@ -93,7 +93,10 @@ const Driver = (props) => {
             round: race.round,
             race: race.raceName,
             grandPrix: (
-              <div>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+              }}>
                 <Flag
                   size={50}
                   country={`${getFlagCode(

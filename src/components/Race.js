@@ -102,7 +102,7 @@ const Race = (props) => {
               dataIndex: 'Driver',
               key: 'Driver',
               render: (driver) => (
-                <div>
+                <div style={{display: 'flex', alignItems: 'center'}}>
                   <Flag
                     country={getFlagCode(props.flags, driver.nationality)}
                   />

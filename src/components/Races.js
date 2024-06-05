@@ -140,7 +140,7 @@ export default function Races(props) {
     date: race.date,
     raceName: race.raceName,
     grandPrix: (
-      <div>
+      <div style={{display: 'flex', alignItems: 'center'}}>
         <Flag
           country={getFlagCode(props.flags, race.Circuit.Location.country)}
         />
@@ -148,7 +148,7 @@ export default function Races(props) {
       </div>
     ),
     winner: (
-      <div>
+      <div style={{display: 'flex', alignItems: 'center'}}>
         <Flag
           country={getFlagCode(props.flags, race.Results[0].Driver.nationality)}
         />

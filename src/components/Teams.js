@@ -85,7 +85,7 @@ export default function Teams(props) {
           Team: (
             <div
               onClick={() => handleConstructorClick(constructor.Constructor.constructorId)}
-              style={{ cursor: 'pointer' }}
+              style={{display: 'flex', alignItems: 'center', cursor: 'pointer' }}
             >
               <Flag
                 size={50}
