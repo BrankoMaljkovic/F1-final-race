@@ -5,6 +5,7 @@ import Flag from 'react-flagkit';
 import { getFlagCode } from '../helpers';
 import { Table, Input, Space, Select } from 'antd';
 import Breadcrumbs from './Breadcrumb';
+import F1Loader from './F1Loader';
 
 const { Option } = Select;
 
@@ -56,7 +57,7 @@ export default function Races(props) {
   // };
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return < F1Loader />;
   }
 
   // Breadcrumb - promenjiva sa detaljima

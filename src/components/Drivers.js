@@ -5,6 +5,8 @@ import Flag from 'react-flagkit';
 import { getFlagCode } from "../helpers";
 import { Table } from 'antd';
 import Breadcrumbs from './Breadcrumb';
+import F1Loader from './F1Loader';
+
 
 export default function Drivers(props) {
     console.log('drivers', props.flags);
@@ -37,7 +39,7 @@ export default function Drivers(props) {
     console.log(`table`, drivers);
     
     if (loading) {
-        return <h1>Loading...</h1>
+        return < F1Loader />;
     }
 
     // Breadcrumb - promenjiva sa detaljima

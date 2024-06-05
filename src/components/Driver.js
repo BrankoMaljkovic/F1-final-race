@@ -8,6 +8,7 @@ import { getPositionColor } from '../helpers';
 import Breadcrumbs from './Breadcrumb';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Flex, Tooltip } from 'antd';
+import F1Loader from './F1Loader';
 
 const Driver = (props) => {
   const [driverDetails, setDriverDetails] = useState({});
@@ -41,7 +42,7 @@ const Driver = (props) => {
   }, [driverId]);
 
   if (loading) {
-    return <Spin />;
+    return < F1Loader />;
   }
 
   const breadcrumbs = [

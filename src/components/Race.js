@@ -7,6 +7,7 @@ import { getFlagCode, getPositionColor } from '../helpers';
 import Breadcrumbs from './Breadcrumb';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Flex, Tooltip } from 'antd';
+import F1Loader from './F1Loader';
 
 const Race = (props) => {
   const { raceId } = useParams();
@@ -43,7 +44,7 @@ const Race = (props) => {
   };
 
   if (loading) {
-    return <Spin />;
+    return < F1Loader />;
   }
 
   // Breadcrumb - promenjiva sa detaljima

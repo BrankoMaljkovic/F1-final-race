@@ -6,6 +6,7 @@ import { getFlagCode } from '../helpers';
 import Team from './Team';
 import { Table } from 'antd';
 import Breadcrumbs from './Breadcrumb';
+import F1Loader from './F1Loader';
 
 export default function Teams(props) {
   const [constructors, setConstructors] = useState([]);
@@ -35,7 +36,7 @@ export default function Teams(props) {
   };
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return < F1Loader />;
   }
 
     // Breadcrumb - promenjiva sa detaljima
