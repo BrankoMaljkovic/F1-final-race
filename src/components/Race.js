@@ -44,11 +44,11 @@ const Race = (props) => {
     return <Spin />;
   }
 
+  // Breadcrumb - promenjiva sa detaljima
   const breadcrumbs = [
-    {label: 'Home'},
-    { label: 'Drivers', link: '/' },
-    { label: 'Teams', link: '/teams '},
+    {label: 'Home', link: '/'},
     { label: 'Races', link: '/races' },
+    { label: `${qualifyingResults.raceName}`},
     ];
 
   let uniqueTeams = [
@@ -59,8 +59,8 @@ const Race = (props) => {
   console.log(`QualifyingResults`, qualifyingResults);
 
   return (
+      <div><div><Breadcrumbs breadcrumbs={breadcrumbs}/></div>
     <div className='race-container'>
-      <Breadcrumbs breadcrumbs={breadcrumbs}/>
       {/* Race card */}
       <Card
         title='Race Details'
@@ -219,6 +219,7 @@ const Race = (props) => {
           pagination={false}
         />
       </Card>
+    </div>
     </div>
   );
 };

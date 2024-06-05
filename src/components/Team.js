@@ -42,16 +42,16 @@ const Team = (props) => {
     return <Spin />;
   }
 
+  // Breadcrumb - promenjiva sa detaljima
   const breadcrumbs = [
-    {label: 'Home'},
-    { label: 'Drivers', link: '/' },
-    { label: 'Teams', link: '/teams '},
-    { label: 'Races', link: '/races' },
+    {label: 'Home', link: '/'},
+    { label: 'Teams', link: '/teams'},
+    { label: `${teamDetails.Constructor.name}`},
     ];
 
   return (
+    <div>  <div><Breadcrumbs breadcrumbs={breadcrumbs}/></div>
     <div className='team-container'>
-      <Breadcrumbs breadcrumbs={breadcrumbs}/>
       {/* Team card */}
       <Card
         title='Team Details'
@@ -150,6 +150,7 @@ const Team = (props) => {
           ]}
         />
       </Card>
+    </div>
     </div>
   );
 };
