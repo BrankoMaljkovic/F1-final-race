@@ -8,6 +8,7 @@ import Race from './components/Race';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import SeasonYear from './components/SeasonYear';
+import Home from './components/Home';
 
 export default function App() {
   const backgroundStyle = {
@@ -32,7 +33,7 @@ export default function App() {
   };
 
   return (
-    <div className='backround' style={backgroundStyle}>
+    
       <div className='App'>
         <Router>
           <nav className='top-navigation'>
@@ -51,27 +52,24 @@ export default function App() {
             </div>
           </nav>
 
-          <div className='main-view'>
-            <Routes>
-              <Route path='/' element={<Drivers flags={flagsList} />} />
-              <Route
-                path='/driverDetails/:driverId'
-                element={<Driver flags={flagsList} />}
-              />
-              <Route path='/teams' element={<Teams flags={flagsList} />} />
-              <Route
-                path='/teamDetails/:teamId'
-                element={<Team flags={flagsList} />}
-              />
-              <Route path='/races' element={<Races flags={flagsList} />} />
-              <Route
-                path='/race/:raceId'
-                element={<Race flags={flagsList} />}
-              />
-            </Routes>
-          </div>
-        </Router>
+        <div className='main-view'>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path='/drivers' element={<Drivers flags={flagsList} />} />
+            <Route
+              path='/driverDetails/:driverId'
+              element={<Driver flags={flagsList} />}
+            />
+            <Route path='/teams' element={<Teams flags={flagsList} />} />
+            <Route
+              path='/teamDetails/:teamId'
+              element={<Team flags={flagsList} />}
+            />
+            <Route path='/races' element={<Races flags={flagsList} />} />
+            <Route path='/race/:raceId' element={<Race flags={flagsList} />} />
+          </Routes>
+        </div>
+      </Router>
       </div>
-    </div>
   );
 }

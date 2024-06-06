@@ -47,7 +47,7 @@ const Driver = (props) => {
 
   const breadcrumbs = [
     { label: 'Home' },
-    { label: 'Drivers', link: '/' },
+    { label: 'Drivers', link: '/drivers' },
     { label: `${driverDetails.Driver.familyName}` },
   ];
 
@@ -59,7 +59,8 @@ const Driver = (props) => {
         <Breadcrumbs breadcrumbs={breadcrumbs} />
       </div>
       <div className='driver-container'>
-        <Card title='Driver Details' className='driver-details-card'>
+        <Card title={<span style={{ color: "rgb(255, 255, 255)" }}>Driver Details</span>}
+        className='driver-details-card white-text'>
           <Image
             src={`${
               process.env.PUBLIC_URL
@@ -67,7 +68,7 @@ const Driver = (props) => {
           />
 
           <Flag
-            size={70}
+            size={50}
             country={`${getFlagCode(
               props.flags,
               driverDetails.Driver.nationality

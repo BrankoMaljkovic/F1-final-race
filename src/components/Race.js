@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Spin, Card, Table } from 'antd';
+import { Spin, Card, Table, Row } from 'antd';
 import Flag from 'react-flagkit';
 import { getFlagCode, getPositionColor } from '../helpers';
 import Breadcrumbs from './Breadcrumb';
@@ -69,12 +69,12 @@ const Race = (props) => {
       <div className='race-container'>
         {/* Race card */}
         <Card
-          title='Race Details'
+          title={<span style={{ color: "rgb(255, 255, 255)" }}>Race Details</span>}
           className='race-details-card'
           style={{ marginBottom: 20 }}
         >
           <Flag
-            size={200}
+            size={100}
             country={getFlagCode(
               props.flags,
               qualifyingResults.Circuit.Location.country
@@ -173,14 +173,14 @@ const Race = (props) => {
                 dataIndex: 'Driver',
                 key: 'Driver',
                 render: (driver) => (
-                  <span>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Flag
                       size={50}
                       country={getFlagCode(props.flags, driver.nationality)}
                       style={{ marginRight: '5px' }}
                     />
                     {driver.familyName}
-                  </span>
+                  </div>
                 ),
                 filters: [
                   ...raceResults.map((driver) => {
