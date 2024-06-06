@@ -47,7 +47,7 @@ const Driver = (props) => {
 
   const breadcrumbs = [
     { label: 'Home' },
-    { label: 'Drivers', link: '/' },
+    { label: 'Drivers', link: '/drivers' },
     { label: `${driverDetails.Driver.familyName}` },
   ];
 
@@ -68,7 +68,7 @@ const Driver = (props) => {
           />
 
           <Flag
-            size={70}
+            size={50}
             country={`${getFlagCode(
               props.flags,
               driverDetails.Driver.nationality

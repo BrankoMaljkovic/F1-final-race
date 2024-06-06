@@ -57,11 +57,14 @@ export default function Races(props) {
   // };
 
   if (loading) {
-    return <F1Loader />;
+    return < F1Loader />;
   }
 
   // Breadcrumb - promenjiva sa detaljima
-  const breadcrumbs = [{ label: 'Home', link: '/' }, { label: 'Races' }];
+  const breadcrumbs = [
+    { label: 'Home', link: '/' },
+    { label: 'Races'},
+    ];
 
   let uniqueWiner = [
     ...new Set(races.map((item) => item.Results[0].Driver.familyName)),
@@ -109,16 +112,8 @@ export default function Races(props) {
       onFilter: (value, record) => record.circuitName.includes(value), // setujemo record.name
       width: '30%',
     },
-    {
-      title: 'Date',
-      dataIndex: 'date',
-      key: 'date',
-      width: 200,
-      align: 'center',
-      render: (text) => (
-        <span style={{ width: '200px', display: 'inline-block' }}>{text}</span>
-      ),
-    },
+    { title: 'Date', dataIndex: 'date', key: 'date', width: 200, align: 'center',
+      render: (text) => <span style={{ width: '200px', display: 'inline-block' }}>{text}</span>, },
     {
       title: 'Winner',
       dataIndex: 'winner',
@@ -147,21 +142,19 @@ export default function Races(props) {
     date: race.date,
     raceName: race.raceName,
     grandPrix: (
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{display: 'flex', alignItems: 'center'}}>
         <Flag
           size={50}
           country={getFlagCode(props.flags, race.Circuit.Location.country)}
-          style={{ marginRight: '5px' }}
         />
         {race.raceName}
       </div>
     ),
     winner: (
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{display: 'flex', alignItems: 'center'}}>
         <Flag
           size={50}
           country={getFlagCode(props.flags, race.Results[0].Driver.nationality)}
-          style={{ marginRight: '5px' }}
         />
         {race.Results[0].Driver.familyName}
       </div>
@@ -170,8 +163,7 @@ export default function Races(props) {
 
   return (
     <div>
-      <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <h1>List of Races</h1>
+      <Breadcrumbs breadcrumbs={breadcrumbs}/>
       <div className='table'>
         <h1></h1>
 
