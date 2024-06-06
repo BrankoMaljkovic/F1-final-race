@@ -98,7 +98,8 @@ const Race = (props) => {
         </Card>
 
         {/* Qualifying Results Table */}
-        <Card title='Qualifying Results'>
+        {/* <Card title='Qualifying Results'> */}
+        <div className='two-table'> 
           <Table
           rowClassName={(record, index) => index % 2 === 0 ? 'odd-row' : ''} 
             dataSource={qualifyingResults.QualifyingResults}
@@ -161,10 +162,10 @@ const Race = (props) => {
             ]}
             pagination={false}
           />
-        </Card>
+        {/* </Card> */}
 
         {/* Race Results Table */}
-        <Card title='Race Results'>
+        {/* <Card title='Race Results'> */}
           <Table
             dataSource={raceResults}
             columns={[
@@ -240,7 +241,8 @@ const Race = (props) => {
             ]}
             pagination={false}
           />
-        </Card>
+        {/* </Card> */}
+        </div>
       </div>
     </div>
   );
