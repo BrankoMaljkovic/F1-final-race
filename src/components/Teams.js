@@ -36,27 +36,25 @@ export default function Teams(props) {
   };
 
   if (loading) {
-    return < F1Loader />;
+    return <F1Loader />;
   }
 
-    // Breadcrumb - promenjiva sa detaljima
-  const breadcrumbs = [
-    {label: 'Home', link: '/'},
-    { label: 'Teams'},
-    ];
+  // Breadcrumb - promenjiva sa detaljima
+  const breadcrumbs = [{ label: 'Home', link: '/' }, { label: 'Teams' }];
 
   const columns = [
     { title: 'Constructors', dataIndex: 'Number', align: 'center' },
     {
-      title: 'Team', dataIndex: 'Team',
+      title: 'Team',
+      dataIndex: 'Team',
       filters: [
-        ...constructors.map((team, i) => { // Spread Operator - za prikaz elemenata objekta (u suprotnom se prikazuje ceo objekat)
-          return (
-            {
-              text: `${team.Constructor.name}`,
-              value: `${team.Constructor.name}`
-            })
-        })
+        ...constructors.map((team, i) => {
+          // Spread Operator - za prikaz elemenata objekta (u suprotnom se prikazuje ceo objekat)
+          return {
+            text: `${team.Constructor.name}`,
+            value: `${team.Constructor.name}`,
+          };
+        }),
       ],
       filterMode: 'tree',
       filterSearch: true,
@@ -64,65 +62,74 @@ export default function Teams(props) {
       width: '30%',
     },
     {
-      title: 'Details', dataIndex: ``, align: 'center',
-      render: (text, record) => <a
-        href={record.url}
-        target='blank' >Details</a>
-
-
+      title: 'Details',
+      dataIndex: ``,
+      align: 'center',
+      render: (text, record) => (
+        <a href={record.url} target='blank'>
+          Details
+        </a>
+      ),
     },
     {
-      title: 'Team Points', dataIndex: 'teamPoints', align: 'center',
+      title: 'Team Points',
+      dataIndex: 'teamPoints',
+      align: 'center',
       sorter: (a, b) => a.teamPoints - b.teamPoints,
     },
   ];
 
-  const data =
-    constructors.map((constructor, i) => {
-      return (
-        {
-          Number: i + 1,
-          Team: (
-            <div
-              onClick={() => handleConstructorClick(constructor.Constructor.constructorId)}
-              style={{display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-            >
-              <Flag
-                size={50}
-                country={getFlagCode(props.flags, constructor.Constructor.nationality)}
-                style={{ marginRight: '5px' }}
-              />
-              {constructor.Constructor.name}
-            </div>
-          ),
-          url: constructor.Constructor.url,
-          teamPoints: constructor.points,
-          TeamFilter: constructor.Constructor.name,
-          constId: constructor.Constructor.constructorId
-        })
-    })
+  const data = constructors.map((constructor, i) => {
+    return {
+      Number: i + 1,
+      Team: (
+        <div
+          onClick={() =>
+            handleConstructorClick(constructor.Constructor.constructorId)
+          }
+          style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+        >
+          <Flag
+            size={50}
+            country={getFlagCode(
+              props.flags,
+              constructor.Constructor.nationality
+            )}
+            style={{ marginRight: '5px' }}
+          />
+          {constructor.Constructor.name}
+        </div>
+      ),
+      url: constructor.Constructor.url,
+      teamPoints: constructor.points,
+      TeamFilter: constructor.Constructor.name,
+      constId: constructor.Constructor.constructorId,
+    };
+  });
 
   const onChange = (pagination, filters, sorter, extra) => {
     console.log('params', pagination, filters, sorter, extra);
   };
 
-
-
-
   return (
     <div className='App'>
-      <Breadcrumbs breadcrumbs={breadcrumbs}/>
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
+      <h1>Teams Championship</h1>
       {/* Teams 1st table */}
-      <Table columns={columns} dataSource={data} onChange={onChange}  pagination={{ pageSize: 11 }}
-      onRow={(record) => ({ // onRow za svaki red funkcija
-        onClick: () => handleConstructorClick(record.constId), // record podaci iz objekta, id je driverId
+      <Table
+        columns={columns}
+        dataSource={data}
+        onChange={onChange}
+        pagination={{ pageSize: 11 }}
+        onRow={(record) => ({
+          // onRow za svaki red funkcija
+          onClick: () => handleConstructorClick(record.constId), // record podaci iz objekta, id je driverId
         })}
         style={{ cursor: 'pointer' }}
         // scroll={{ y: 400 }}
-        />
-      
+      />
 
-        {/* <table>
+      {/* <table>
           <thead>
             <tr>
               <th></th>
