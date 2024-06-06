@@ -170,6 +170,7 @@ export default function Races(props) {
         <Table
           columns={columns}
           dataSource={data}
+          rowClassName={(record, index) => index % 2 === 0 ? 'odd-row' : ''}
           onRow={(record) => ({
             // onRow za svaki red funkcija
             onClick: () => handleRacesId(record.round), // record podaci iz objekta, id je driverId

@@ -95,6 +95,7 @@ const Driver = (props) => {
 
         <div className='driver-table'>
           <Table
+           rowClassName={(record, index) => index % 2 === 0 ? 'odd-row' : ''}
             dataSource={driverRaces.map((race) => ({
               key: race.round,
               round: race.round,

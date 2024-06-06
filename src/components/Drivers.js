@@ -123,7 +123,8 @@ export default function Drivers(props) {
             {/* Drivers 1st table */}
             <div className="table">
                 <h1>Drivers Championship</h1>
-                <Table columns={columns} dataSource={data} onChange={onChange} 
+                <Table columns={columns} dataSource={data} onChange={onChange}
+                rowClassName={(record, index) => index % 2 === 0 ? 'odd-row' : ''} 
                  onRow={(record) => ({ // onRow za svaki red funkcija
                  onClick: () => handleDriverId(record.id), // record podaci iz objekta, id je driverId
                  })} style={{ cursor: 'pointer' }}

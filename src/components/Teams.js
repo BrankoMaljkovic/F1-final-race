@@ -114,6 +114,7 @@ export default function Teams(props) {
       <Breadcrumbs breadcrumbs={breadcrumbs}/>
       {/* Teams 1st table */}
       <Table columns={columns} dataSource={data} onChange={onChange}  pagination={{ pageSize: 11 }}
+      rowClassName={(record, index) => index % 2 === 0 ? 'odd-row' : ''}
       onRow={(record) => ({ // onRow za svaki red funkcija
         onClick: () => handleConstructorClick(record.constId), // record podaci iz objekta, id je driverId
         })}

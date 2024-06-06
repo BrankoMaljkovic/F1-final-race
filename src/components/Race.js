@@ -100,6 +100,7 @@ const Race = (props) => {
         {/* Qualifying Results Table */}
         <Card title='Qualifying Results'>
           <Table
+          rowClassName={(record, index) => index % 2 === 0 ? 'odd-row' : ''} 
             dataSource={qualifyingResults.QualifyingResults}
             columns={[
               { title: 'Pos', dataIndex: 'position', key: 'position' },

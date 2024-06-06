@@ -97,6 +97,7 @@ const Team = (props) => {
         <div className='team-table'>
           <Card title='Team Results'>
             <Table
+            rowClassName={(record, index) => index % 2 === 0 ? 'odd-row' : ''} 
               dataSource={teamResults.map((race) => ({
                 key: race.round,
                 round: race.round,
