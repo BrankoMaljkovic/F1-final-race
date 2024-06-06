@@ -61,7 +61,7 @@ const Team = (props) => {
       <div className='team-container'>
         {/* Team card */}
         <Card
-          title='Team Details'
+          title={<span style={{ color: "rgb(255, 255, 255)" }}>Team Details</span>}
           className='teams-details-card'
           style={{ marginBottom: 20 }}
         >

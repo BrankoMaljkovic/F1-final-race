@@ -59,7 +59,8 @@ const Driver = (props) => {
         <Breadcrumbs breadcrumbs={breadcrumbs} />
       </div>
       <div className='driver-container'>
-        <Card title='Driver Details' className='driver-details-card'>
+        <Card title={<span style={{ color: "rgb(255, 255, 255)" }}>Driver Details</span>}
+        className='driver-details-card white-text'>
           <Image
             src={`${
               process.env.PUBLIC_URL
