@@ -113,6 +113,7 @@ const Race = (props) => {
                     <Flag
                       size={50}
                       country={getFlagCode(props.flags, driver.nationality)}
+                      style={{ marginRight: '5px' }}
                     />
                     {driver.familyName}
                   </div>
@@ -173,13 +174,14 @@ const Race = (props) => {
                 dataIndex: 'Driver',
                 key: 'Driver',
                 render: (driver) => (
-                  <span>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Flag
                       size={50}
                       country={getFlagCode(props.flags, driver.nationality)}
+                      style={{ marginRight: '5px' }}
                     />
                     {driver.familyName}
-                  </span>
+                  </div>
                 ),
                 filters: [
                   ...raceResults.map((driver) => {

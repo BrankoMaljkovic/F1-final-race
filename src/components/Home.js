@@ -1,3 +1,6 @@
+import { Redirect } from 'react-router-dom';
+
+
 export default function Home() {
 
     let audio = new Audio("/sound/soundloader.mp3")
@@ -5,6 +8,17 @@ export default function Home() {
     const start = () => {
         audio.play()
     }
+
+    const handleStart = () => {
+        start();
+        setTimeout(() => {
+            window.location.href = '/drivers'
+        }, 6000);
+        
+    };
+    
+
+    
 
     return (
         <div className="home-container">
@@ -14,7 +28,7 @@ export default function Home() {
 
 
             <div className="sound-btn">
-                <img src="/img/buttonstart-cropped.jpg" onClick={start} className="ignition-button"/>
+                <img src="/img/buttonstart-cropped.jpg" onClick={handleStart} className="ignition-button"/>
             </div>
         </div>
     );

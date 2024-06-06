@@ -1,4 +1,5 @@
-$primary-color: #222;
+$primary-color: black;
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap');
 
 body {
@@ -172,13 +173,6 @@ body {
   border-radius: 50px;
 }
 
-
-
-
-
-
-
-
 .home-container {
   display: flex;
   width: 100%;
@@ -202,15 +196,18 @@ body {
   }
 
   .sound-btn {
-    // position: relative;
-    z-index: 1;
-    /* Ensure the button is above the video */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* Ensure the button is above the video */
     display: flex;
     justify-content: center;
     align-items: center;
-    img {
+  }
+  .sound-btn img {
     height: 150px;
     width: 150px;
-}
+    cursor: pointer;
   }
 }

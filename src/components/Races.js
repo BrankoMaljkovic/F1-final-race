@@ -146,6 +146,7 @@ export default function Races(props) {
         <Flag
           size={50}
           country={getFlagCode(props.flags, race.Circuit.Location.country)}
+          style={{ marginRight: '5px' }}
         />
         {race.raceName}
       </div>
@@ -155,6 +156,7 @@ export default function Races(props) {
         <Flag
           size={50}
           country={getFlagCode(props.flags, race.Results[0].Driver.nationality)}
+          style={{ marginRight: '5px' }}
         />
         {race.Results[0].Driver.familyName}
       </div>
