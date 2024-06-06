@@ -40,7 +40,7 @@ export default function App() {
           <div className='right-nav'>
             <ul>
               <li>
-                <Link to='/'>Drivers</Link>
+                <Link to='/drivers'>Drivers</Link>
                 <Link to='/teams'>Teams</Link>
                 <Link to='/races'>Races</Link>
               </li>
