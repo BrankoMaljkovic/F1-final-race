@@ -71,6 +71,8 @@ body {
 // MAIN CONTAINER
 .main-view {
   height: 80vh;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .driver-container,
@@ -95,19 +97,19 @@ body {
   padding: 20px;
   width: 400px; // manja širina
   font-family: Arial, sans-serif;
-  color: #fff; // bela boja teksta
+  color: #fff;
 }
 .race-details-card {
   width: 100%;
   max-width: 400px;
   height: 700px;
   margin-bottom: 20px;
-  background-color: #333; // tamno siva pozadina
-  border: 1px solid #444; // malo svetlija siva za border
+  background-color: #333;
+  border: 1px solid #444;
   padding: 20px;
-  width: 300px; // manja širina
+  width: 300px;
   font-family: Arial, sans-serif;
-  color: #fff; // bela boja teksta
+  color: #fff;
 }
 
 // Tabela TABLE
