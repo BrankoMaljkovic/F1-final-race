@@ -202,15 +202,18 @@ body {
   }
 
   .sound-btn {
-    // position: relative;
-    z-index: 1;
-    /* Ensure the button is above the video */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* Ensure the button is above the video */
     display: flex;
     justify-content: center;
     align-items: center;
-    img {
-    height: 150px;
-    width: 150px;
+}
+  .sound-btn img {
+  height: 150px;
+  width: 150px;
+  cursor: pointer;
 }
   }
-}

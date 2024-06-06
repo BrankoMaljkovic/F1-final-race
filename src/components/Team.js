@@ -108,7 +108,9 @@ const Team = (props) => {
                       country={getFlagCode(
                         props.flags,
                         race.Circuit.Location.country
+                        
                       )}
+                      style={{ marginRight: '5px' }}
                     />
                     {race.raceName}
                   </div>
