@@ -11,6 +11,13 @@ import SeasonYear from './components/SeasonYear';
 import Home from './components/Home';
 
 export default function App() {
+  const backgroundStyle = {
+    backgroundImage: 'url(/pozadina1.png)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    width: '100%',
+    height: '100vh',
+  };
   const [flagsList, setFlagsList] = useState([]);
 
   useEffect(() => {
@@ -26,24 +33,24 @@ export default function App() {
   };
 
   return (
-    <div className='App'>
-      <Router>
-        <nav className='top-navigation'>
-          <img src='../img/Logo.jpg' alt='' />
-          <div className='right-nav'>
-            <ul>
-              <li>
-              <Link to='/'>Home</Link>
-                <Link to='/drivers'>Drivers</Link>
-                <Link to='/teams'>Teams</Link>
-                <Link to='/races'>Races</Link>
-              </li>
-            </ul>
-            <div className='year-select'>
-              <SeasonYear />
+    
+      <div className='App'>
+        <Router>
+          <nav className='top-navigation'>
+            <img src='../img/Logo.jpg' alt='' />
+            <div className='right-nav'>
+              <ul>
+                <li>
+                  <Link to='/'>Drivers</Link>
+                  <Link to='/teams'>Teams</Link>
+                  <Link to='/races'>Races</Link>
+                </li>
+              </ul>
+              <div className='year-select'>
+                <SeasonYear />
+              </div>
             </div>
-          </div>
-        </nav>
+          </nav>
 
         <div className='main-view'>
           <Routes>
@@ -63,6 +70,6 @@ export default function App() {
           </Routes>
         </div>
       </Router>
-    </div>
+      </div>
   );
 }
