@@ -10,6 +10,13 @@ import { useEffect, useState } from 'react';
 import SeasonYear from './components/SeasonYear';
 
 export default function App() {
+  const backgroundStyle = {
+    backgroundImage: 'url(/pozadina1.png)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    width: '100%',
+    height: '100vh',
+  };
   const [flagsList, setFlagsList] = useState([]);
 
   useEffect(() => {
@@ -25,41 +32,46 @@ export default function App() {
   };
 
   return (
-    <div className='App'>
-      <Router>
-        <nav className='top-navigation'>
-          <img src='../img/Logo.jpg' alt='' />
-          <div className='right-nav'>
-            <ul>
-              <li>
-                <Link to='/'>Drivers</Link>
-                <Link to='/teams'>Teams</Link>
-                <Link to='/races'>Races</Link>
-              </li>
-            </ul>
-            <div className='year-select'>
-              <SeasonYear />
+    <div className='backround' style={backgroundStyle}>
+      <div className='App'>
+        <Router>
+          <nav className='top-navigation'>
+            <img src='../img/Logo.jpg' alt='' />
+            <div className='right-nav'>
+              <ul>
+                <li>
+                  <Link to='/'>Drivers</Link>
+                  <Link to='/teams'>Teams</Link>
+                  <Link to='/races'>Races</Link>
+                </li>
+              </ul>
+              <div className='year-select'>
+                <SeasonYear />
+              </div>
             </div>
-          </div>
-        </nav>
+          </nav>
 
-        <div className='main-view'>
-          <Routes>
-            <Route path='/' element={<Drivers flags={flagsList} />} />
-            <Route
-              path='/driverDetails/:driverId'
-              element={<Driver flags={flagsList} />}
-            />
-            <Route path='/teams' element={<Teams flags={flagsList} />} />
-            <Route
-              path='/teamDetails/:teamId'
-              element={<Team flags={flagsList} />}
-            />
-            <Route path='/races' element={<Races flags={flagsList} />} />
-            <Route path='/race/:raceId' element={<Race flags={flagsList} />} />
-          </Routes>
-        </div>
-      </Router>
+          <div className='main-view'>
+            <Routes>
+              <Route path='/' element={<Drivers flags={flagsList} />} />
+              <Route
+                path='/driverDetails/:driverId'
+                element={<Driver flags={flagsList} />}
+              />
+              <Route path='/teams' element={<Teams flags={flagsList} />} />
+              <Route
+                path='/teamDetails/:teamId'
+                element={<Team flags={flagsList} />}
+              />
+              <Route path='/races' element={<Races flags={flagsList} />} />
+              <Route
+                path='/race/:raceId'
+                element={<Race flags={flagsList} />}
+              />
+            </Routes>
+          </div>
+        </Router>
+      </div>
     </div>
   );
 }
