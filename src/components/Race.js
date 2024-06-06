@@ -112,6 +112,7 @@ const Race = (props) => {
                     <Flag
                       size={50}
                       country={getFlagCode(props.flags, driver.nationality)}
+                      style={{ marginRight: '5px' }}
                     />
                     {driver.familyName}
                   </div>
@@ -176,6 +177,7 @@ const Race = (props) => {
                     <Flag
                       size={50}
                       country={getFlagCode(props.flags, driver.nationality)}
+                      style={{ marginRight: '5px' }}
                     />
                     {driver.familyName}
                   </span>
