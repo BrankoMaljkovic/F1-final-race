@@ -110,6 +110,7 @@ const Team = (props) => {
                         props.flags,
                         race.Circuit.Location.country
                       )}
+                      style={{ marginRight: '5px' }}
                     />
                     {race.raceName}
                   </div>
