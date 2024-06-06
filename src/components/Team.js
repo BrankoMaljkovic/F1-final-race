@@ -42,7 +42,7 @@ const Team = (props) => {
   }, [teamId]);
 
   if (loading) {
-    return < F1Loader />;
+    return <F1Loader />;
   }
 
   // Breadcrumb - promenjiva sa detaljima
@@ -72,6 +72,7 @@ const Team = (props) => {
             alt='Driver_Image'
           />
           <Flag
+            size={70}
             country={getFlagCode(
               props.flags,
               teamDetails.Constructor.nationality

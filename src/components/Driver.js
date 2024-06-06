@@ -67,7 +67,7 @@ const Driver = (props) => {
           />
 
           <Flag
-            size={50}
+            size={70}
             country={`${getFlagCode(
               props.flags,
               driverDetails.Driver.nationality
