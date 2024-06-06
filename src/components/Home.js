@@ -13,7 +13,7 @@ export default function Home() {
         start();
         setTimeout(() => {
             window.location.href = '/drivers'
-        }, 3000);
+        }, 6000);
         
     };
     
