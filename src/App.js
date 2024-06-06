@@ -8,6 +8,7 @@ import Race from './components/Race';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import SeasonYear from './components/SeasonYear';
+import Home from './components/Home';
 
 export default function App() {
   const [flagsList, setFlagsList] = useState([]);
@@ -32,7 +33,8 @@ export default function App() {
           <div className='right-nav'>
             <ul>
               <li>
-                <Link to='/'>Drivers</Link>
+              <Link to='/'>Home</Link>
+                <Link to='/drivers'>Drivers</Link>
                 <Link to='/teams'>Teams</Link>
                 <Link to='/races'>Races</Link>
               </li>
@@ -45,7 +47,8 @@ export default function App() {
 
         <div className='main-view'>
           <Routes>
-            <Route path='/' element={<Drivers flags={flagsList} />} />
+            <Route path="/" element={<Home />} />
+            <Route path='/drivers' element={<Drivers flags={flagsList} />} />
             <Route
               path='/driverDetails/:driverId'
               element={<Driver flags={flagsList} />}

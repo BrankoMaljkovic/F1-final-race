@@ -47,7 +47,7 @@ const Driver = (props) => {
 
   const breadcrumbs = [
     { label: 'Home' },
-    { label: 'Drivers', link: '/' },
+    { label: 'Drivers', link: '/drivers' },
     { label: `${driverDetails.Driver.familyName}` },
   ];
 
