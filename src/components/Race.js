@@ -69,7 +69,9 @@ const Race = (props) => {
       <div className='race-container'>
         {/* Race card */}
         <Card
-          title={<span style={{ color: "rgb(255, 255, 255)" }}>Race Details</span>}
+          title={
+            <span style={{ color: 'rgb(255, 255, 255)' }}>Race Details</span>
+          }
           className='race-details-card'
           style={{ marginBottom: 20 }}
         >
@@ -99,9 +101,9 @@ const Race = (props) => {
 
         {/* Qualifying Results Table */}
         {/* <Card title='Qualifying Results'> */}
-        <div className='two-table'> 
+        <div className='two-table'>
           <Table
-          rowClassName={(record, index) => index % 2 === 0 ? 'odd-row' : ''} 
+            rowClassName={(record, index) => (index % 2 === 0 ? 'odd-row' : '')}
             dataSource={qualifyingResults.QualifyingResults}
             columns={[
               { title: 'Pos', dataIndex: 'position', key: 'position' },
@@ -154,7 +156,7 @@ const Race = (props) => {
                 width: '30%',
               },
               {
-                title: 'Best Time',
+                title: 'Time',
                 dataIndex: '',
                 key: 'BestTime',
                 render: (result) => getBestTime(result),
@@ -162,10 +164,10 @@ const Race = (props) => {
             ]}
             pagination={false}
           />
-        {/* </Card> */}
+          {/* </Card> */}
 
-        {/* Race Results Table */}
-        {/* <Card title='Race Results'> */}
+          {/* Race Results Table */}
+          {/* <Card title='Race Results'> */}
           <Table
             dataSource={raceResults}
             columns={[
@@ -241,7 +243,7 @@ const Race = (props) => {
             ]}
             pagination={false}
           />
-        {/* </Card> */}
+          {/* </Card> */}
         </div>
       </div>
     </div>
