@@ -107,10 +107,9 @@ export default function Teams(props) {
   };
 
 
-
-
   return (
     <div className='App'>
+      <h1 style={{ textAlign: 'center', color: '#ff8c00', fontSize: 'bold' , marginTop: 50 }}>Constructors Championship</h1>
       <Breadcrumbs breadcrumbs={breadcrumbs}/>
       {/* Teams 1st table */}
       <Table columns={columns} dataSource={data} onChange={onChange}  pagination={{ pageSize: 11 }}
@@ -121,73 +120,7 @@ export default function Teams(props) {
         style={{ cursor: 'pointer' }}
         // scroll={{ y: 400 }}
         />
-      
 
-        {/* <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {constructors.map((constructor, index) => (
-              <tr key={constructor.Constructor.constructorId}>
-                <td>
-                  <Flag
-                    country={getFlagCode(
-                      props.flags,
-                      constructor.Constructor.nationality
-                    )}
-                  />
-                </td>
-                <td
-                  onClick={() =>
-                    handleConstructorClick(
-                      constructor.Constructor.constructorId
-                    )
-                  }
-                >
-                  {index + 1}
-                </td>
-                <td
-                  onClick={() =>
-                    handleConstructorClick(
-                      constructor.Constructor.constructorId
-                    )
-                  }
-                >
-                  {constructor.Constructor.name}
-                </td>
-                <td
-                  onClick={() =>
-                    handleConstructorClick(
-                      constructor.Constructor.constructorId
-                    )
-                  }
-                >
-                  {constructor.points}
-                </td>
-                <td>
-                  <a
-                    href={constructor.Constructor.url}
-                    target='blank'
-                    onClick={() =>
-                      console.log(`Details clicked for:
-                        ${constructor.Constructor.constructorId}`)
-                    }
-                  >
-                    {' '}
-                    Details
-                  </a>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table> */}
-      {/* </div> */}
     </div>
   );
 }

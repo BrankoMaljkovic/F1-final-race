@@ -24,9 +24,7 @@ export default function Drivers(props) {
 
     const getDrivers = async () => {
         const url = "http://ergast.com/api/f1/2013/driverStandings.json";
-        // console.log(url);
         const response = await axios.get(url);
-        // console.log(`test`, response.data.MRData.StandingsTable.StandingsLists[0]);
         setDrivers(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         setLoading(false);
     }
@@ -122,11 +120,11 @@ export default function Drivers(props) {
             <Breadcrumbs breadcrumbs={breadcrumbs}/>
             {/* Drivers 1st table */}
             <div className="table">
-                <h1>Drivers Championship</h1>
+                <h1 style={{ textAlign: 'center', color: '#ff8c00' }}>Drivers Championship</h1>
                 <Table columns={columns} dataSource={data} onChange={onChange}
                 rowClassName={(record, index) => index % 2 === 0 ? 'odd-row' : ''} 
-                 onRow={(record) => ({ // onRow za svaki red funkcija
-                 onClick: () => handleDriverId(record.id), // record podaci iz objekta, id je driverId
+                 onRow={(record) => ({ 
+                 onClick: () => handleDriverId(record.id),
                  })} style={{ cursor: 'pointer' }}
                  />
 
@@ -134,38 +132,3 @@ export default function Drivers(props) {
         </div >
     )
 }
-
-/*
-<table>
-                    <thead>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </thead>
-                    <tbody>
-                        {drivers.map((driver, i) => {
-                            console.log(driver);
-                            return (
-                                <tr
-                                    onClick={() =>
-                                        handleDriverId(
-                                            driver.Driver.driverId
-                                        )
-                                    }
-                                >
-                                    <td>
-                                        <Flag country={getFlagCode(props.flags, driver.Driver.nationality)} />
-                                    </td>
-                                    <td>{driver.position}</td>
-                                    <td>{driver.Driver.givenName} {driver.Driver.familyName}</td>
-                                    <td>{driver.Constructors[0].constructorId}</td>
-                                    <td>{driver.points}</td>
-                                </tr>
-                            )
-
-                        }
-                        )}
-                    </tbody>
-                </table>
-                */
