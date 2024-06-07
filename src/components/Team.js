@@ -97,7 +97,7 @@ const Team = (props) => {
         </Card>
 
         {/* Team results table */}
-        <div className='team-table'>
+        <div className='team-table' style={{marginTop: "20px"}}>
           <Card title='Team Results'>
             <Table
               rowClassName={(record, index) =>

@@ -60,7 +60,7 @@ const Driver = (props) => {
       </div>
       <div className='driver-container'>
         <Card title={<span style={{ color: "rgb(255, 255, 255)" }}>Driver Details</span>}
-        className='driver-details-card white-text'>
+        className='driver-details-card white-text' style={{marginTop: "20px"}}>
           <Image
             src={`${
               process.env.PUBLIC_URL
@@ -95,6 +95,7 @@ const Driver = (props) => {
 
         <div className='driver-table'>
           <Table
+            style={{marginTop: "20px"}}
            rowClassName={(record, index) => index % 2 === 0 ? 'odd-row' : ''}
             dataSource={driverRaces.map((race) => ({
               key: race.round,
@@ -152,7 +153,7 @@ const Driver = (props) => {
                 render: (text) => (
                   <div
                     className='color'
-                    style={{ backgroundColor: getPositionColor(text) }}
+                    style={{ backgroundColor: getPositionColor(text) }} 
                   >
                     {text}
                   </div>
