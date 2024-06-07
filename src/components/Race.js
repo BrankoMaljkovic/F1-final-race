@@ -19,8 +19,8 @@ const Race = (props) => {
     const fetchData = async () => {
       try {
         const [qualifyingResponse, raceResponse] = await Promise.all([
-          axios.get(`http://ergast.com/api/f1/2013/${raceId}/qualifying.json`),
-          axios.get(`http://ergast.com/api/f1/2013/${raceId}/results.json`),
+          axios.get(`https://ergast.com/api/f1/2013/${raceId}/qualifying.json`),
+          axios.get(`https://ergast.com/api/f1/2013/${raceId}/results.json`),
         ]);
 
         const qualifyingData =

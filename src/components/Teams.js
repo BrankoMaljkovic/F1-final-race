@@ -15,7 +15,7 @@ export default function Teams(props) {
 
   useEffect(() => {
     axios
-      .get('http://ergast.com/api/f1/2013/constructorStandings.json')
+      .get('https://ergast.com/api/f1/2013/constructorStandings.json')
       .then((response) => {
         console.log('Fetched constructor standings:', response.data);
         setConstructors(

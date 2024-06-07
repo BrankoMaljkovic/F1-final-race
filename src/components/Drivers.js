@@ -23,7 +23,7 @@ export default function Drivers(props) {
 
 
     const getDrivers = async () => {
-        const url = "http://ergast.com/api/f1/2013/driverStandings.json";
+        const url = "https://ergast.com/api/f1/2013/driverStandings.json";
         const response = await axios.get(url);
         setDrivers(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         setLoading(false);

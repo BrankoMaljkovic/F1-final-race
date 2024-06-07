@@ -19,7 +19,7 @@ export default function Races(props) {
     const fetchRaces = async () => {
       try {
         const response = await axios.get(
-          'http://ergast.com/api/f1/2013/results/1.json'
+          'https://ergast.com/api/f1/2013/results/1.json'
         );
         const raceData = response.data.MRData.RaceTable.Races;
         setRaces(raceData);

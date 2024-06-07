@@ -20,10 +20,10 @@ const Driver = (props) => {
     const fetchData = async () => {
       try {
         const driverDetailsResponse = await axios.get(
-          `http://ergast.com/api/f1/2013/drivers/${driverId}/driverStandings.json`
+          `https://ergast.com/api/f1/2013/drivers/${driverId}/driverStandings.json`
         );
         const driverRacesResponse = await axios.get(
-          `http://ergast.com/api/f1/2013/drivers/${driverId}/results.json`
+          `https://ergast.com/api/f1/2013/drivers/${driverId}/results.json`
         );
 
         setDriverDetails(
