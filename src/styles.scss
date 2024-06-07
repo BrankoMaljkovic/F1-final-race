@@ -103,6 +103,8 @@ body {
   width: 400px; // manja širina
   font-family: Arial, sans-serif;
   color: #fff;
+  margin-right: 20px;
+  margin-top: 20px;
 }
 
 .race-details-card {
@@ -116,6 +118,8 @@ body {
   width: 300px;
   font-family: Arial, sans-serif;
   color: #fff;
+  margin-right: 20px;
+  margin-top: 20px;
 }
 
 // Tabela TABLE
@@ -141,6 +145,7 @@ body {
 
 .table {
   margin-top: 50px;
+  border-collapse: collapse;
 }
 
 .driver-table,
@@ -245,4 +250,26 @@ body {
 
 .separator {
   margin: 0 5px;
+}
+
+.two-table {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px; /* Adjust padding as needed to fill the empty space on the sides */
+}
+
+.two-table .table {
+  width: 48%; /* Adjust width to create space between tables */
+  margin: 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px; /* Space above the table */
+}
+
+.table th, .table td {
+  padding: 10px;
+  border: 1px solid #ddd;
 }

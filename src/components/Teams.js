@@ -109,7 +109,7 @@ export default function Teams(props) {
 
   return (
     <div className='App'>
-      <h1 style={{ textAlign: 'center', color: '#ff8c00', fontSize: 'bold' , marginTop: 50 }}>Constructors Championship</h1>
+      <h1 style={{ textAlign: 'center', color: '#ff8c00', fontSize: 'bold' , marginTop: "50px" }}>Constructors Championship</h1>
       <Breadcrumbs breadcrumbs={breadcrumbs}/>
       {/* Teams 1st table */}
       <Table columns={columns} dataSource={data} onChange={onChange}  pagination={{ pageSize: 11 }}

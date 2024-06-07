@@ -120,7 +120,7 @@ export default function Drivers(props) {
             <Breadcrumbs breadcrumbs={breadcrumbs}/>
             {/* Drivers 1st table */}
             <div className="table">
-                <h1 style={{ textAlign: 'center', color: '#ff8c00' }}>Drivers Championship</h1>
+                <h1 style={{ textAlign: 'center', color: '#ff8c00', marginTop: "50px" }}>Drivers Championship</h1>
                 <Table columns={columns} dataSource={data} onChange={onChange}
                 rowClassName={(record, index) => index % 2 === 0 ? 'odd-row' : ''} 
                  onRow={(record) => ({ 
