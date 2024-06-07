@@ -167,6 +167,7 @@ const Race = (props) => {
         {/* Race Results Table */}
         {/* <Card title='Race Results'> */}
           <Table
+            rowClassName={(record, index) => index % 2 === 0 ? 'odd-row' : ''} 
             dataSource={raceResults}
             columns={[
               { title: 'Pos', dataIndex: 'position', key: 'position' },
