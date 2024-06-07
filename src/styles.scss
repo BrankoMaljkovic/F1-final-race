@@ -224,3 +224,21 @@ body {
   justify-items: stretch;
   margin: auto;
 }
+
+.breadcrumbs {
+  padding: 10px 20px;
+  background-color: #f8f8f8f0; /* Light grey background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  z-index: 1000; /* Ensure it stays on top of other content */
+  position: fixed;
+  left: 0;
+  top: 20%;
+  width: 100%;
+  a {
+    text-decoration: none;
+  }
+}
+
+.separator {
+  margin: 0 5px;
+}
