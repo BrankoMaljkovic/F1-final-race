@@ -42,7 +42,7 @@ const Team = (props) => {
   }, [teamId]);
 
   if (loading) {
-    return < F1Loader />;
+    return <F1Loader />;
   }
 
   // Breadcrumb - promenjiva sa detaljima
@@ -61,7 +61,9 @@ const Team = (props) => {
       <div className='team-container'>
         {/* Team card */}
         <Card
-          title={<span style={{ color: "rgb(255, 255, 255)" }}>Team Details</span>}
+          title={
+            <span style={{ color: 'rgb(255, 255, 255)' }}>Team Details</span>
+          }
           className='teams-details-card'
           style={{ marginBottom: 20 }}
         >
@@ -72,6 +74,7 @@ const Team = (props) => {
             alt='Driver_Image'
           />
           <Flag
+            size={80}
             country={getFlagCode(
               props.flags,
               teamDetails.Constructor.nationality
@@ -97,7 +100,9 @@ const Team = (props) => {
         <div className='team-table'>
           <Card title='Team Results'>
             <Table
-            rowClassName={(record, index) => index % 2 === 0 ? 'odd-row' : ''} 
+              rowClassName={(record, index) =>
+                index % 2 === 0 ? 'odd-row' : ''
+              }
               dataSource={teamResults.map((race) => ({
                 key: race.round,
                 round: race.round,
@@ -109,7 +114,6 @@ const Team = (props) => {
                       country={getFlagCode(
                         props.flags,
                         race.Circuit.Location.country
-                        
                       )}
                       style={{ marginRight: '5px' }}
                     />
